@@ -12,7 +12,7 @@ var Init = {
         TH:
             [{
                 field: "groupName",
-                title: "GroupName",
+                title: "Nhóm",
 
                 template: (dataItem) => {
                     var groupid = dataItem.GroupID;
@@ -20,21 +20,8 @@ var Init = {
                     return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT(${groupid},${date}) '>${dataItem.groupName}</h6>`
                 }
             }, {
-                field: "Amount",
-                title: "Amount",
-                template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.Amount, "##,#")}</h6>`
-                }
-
-            }, {
-                field: "HH",
-                title: "HH",
-                template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.HH, "##,#")}</h6>`
-                }
-            }, {
                 field: "value",
-                title: "Value",
+                title: "Điểm",
                 type: "int",
                 template: (dataItem) => {
                     var groupid = dataItem.GroupID;
@@ -42,100 +29,126 @@ var Init = {
                     return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT(${groupid},${date})'>${kendo.toString(dataItem.value, "##,#")}</h6>`
                 }
             }, {
-                field: "Earn",
-                title: "Earn",
-                type: "int",
+                field: "HH",
+                title: "Hoa Hồng",
                 template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.Earn, "##,#")}</h6>`
+                    return `<h6>${kendo.toString(dataItem.HH, "##,#")}</h6>`
+                }
+            }, {
+                field: "Amount",
+                title: "Trúng",
+                template: (dataItem) => {
+                    return `<h6>${kendo.toString(dataItem.Amount, "##,#")}</h6>`
                 }
 
-
+            }, {
+                field: "Earn",
+                title: "Thắng/Thua",
+                type: "int",
+                template: (dataItem) => {
+                    if (dataItem.Earn > 0)
+                        return `<h6 class='ok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
+                }
             },
             {
                 field: "CreatedDate",
-                title: "CreatedDate",
+                title: "Ngày",
                 type: "date",
                 format: "{0: dd-MM-yyyy hh:mm:ss}"
             }],
         CT:
             [{
                 field: "GroupName",
-                title: "GroupName",
+                title: "Nhóm",
                 template: (dataItem) => {
                     var groupid = dataItem.GroupID;
                     var type = `"${dataItem.Type}"`;
-                    return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT1(${groupid},${type}) '>${dataItem.GroupName}</h6>`
+                    var date = `"${SetDataSource.FormatDate($("#date").data("kendoDatePicker").value())}"`;
+                    return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT1(${groupid},${type},${date}) '>${dataItem.GroupName}</h6>`
                 }
             }, {
+                field: "Type",
+                title: "Kiểu chơi",
+                template: (dataItem) => {
+                    var groupid = dataItem.GroupID;
+                    var type = `"${dataItem.Type}"`;
+                    var date = `"${SetDataSource.FormatDate($("#date").data("kendoDatePicker").value())}"`;
+                    return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT1(${groupid},${type},${date}) '>${dataItem.Type}</h6>`
+                }
+            }, {
+                field: "value",
+                title: "Điểm",
+                template: (dataItem) => {
+                    var groupid = dataItem.GroupID;
+                    var type = `"${dataItem.Type}"`;
+                    var date = `"${SetDataSource.FormatDate($("#date").data("kendoDatePicker").value())}"`;
+                    return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT1(${groupid},${type},${date}) '>${kendo.toString(dataItem.value, "##,#")}</h6>`
+                }
+            }, {
+                field: "HH",
+                title: "Hoa Hồng",
+                template: (dataItem) => {
+                    return `<h6>${kendo.toString(dataItem.HH, "##,#")}</h6>`
+                }
+            },{
                 field: "Amount",
-                title: "Amount",
+                title: "Trúng",
                 template: (dataItem) => {
                     return `<h6>${kendo.toString(dataItem.Amount, "##,#")}</h6>`
                 }
 
             }, {
-                field: "HH",
-                title: "HH",
-                template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.HH, "##,#")}</h6>`
-                }
-            }, {
-                field: "value",
-                title: "Value",
-                template: (dataItem) => {
-                    var groupid = dataItem.GroupID;
-                    var type = `"${dataItem.Type}"`;
-                    return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT1(${groupid},${type}) '>${kendo.toString(dataItem.value, "##,#") }</h6>`
-                }
-            }, {
                 field: "Earn",
-                title: "Earn",
+                title: "Thắng/Thua",
                 template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.Earn, "##,#")}</h6>`
+                    if (dataItem.Earn > 0)
+                        return `<h6 class='ok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
                 }
             },
             {
                 field: "CreatedDate",
-                title: "CreatedDate",
+                title: "Ngày",
                 type: "date",
                 format: "{0: dd-MM-yyyy hh:mm:ss}"
             }],
         CT1:
             [{
                 field: "Num",
-                title: "Num",
+                title: "Số",
                 template: (dataItem) => {
                     ck = dataItem.ck;
-                    if(ck!=-1)
+                    if (ck != -1)
                         return `<span class='ck'>${dataItem.Num}</span>`
                     return `<span class='noneck'>${dataItem.Num}</span>`
                 }
-                
+
+            }, {
+                field: "Value",
+                title: "Điểm"
+
+            }, {
+                field: "HH",
+                title: "Hoa Hồng"
             }, {
                 field: "Amount",
-                title: "Amount",
+                title: "Trúng",
                 template: (dataItem) => {
                     return `<h6>${kendo.toString(dataItem.Amount, "##,#")}</h6>`
                 }
             }, {
-                field: "HH",
-                title: "HH"
-            }, {
-                field: "Value",
-                title: "Value"
-
-            }, {
                 field: "Earn",
-                title: "Earn",
+                title: "Thắng/Thua",
                 template: (dataItem) => {
                     if (dataItem.Earn > 0)
                         return `<h6 class='ok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
-                    return `<h6 class'notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
                 }
             },
             {
                 field: "CreatedDate",
-                title: "CreatedDate",
+                title: "Ngày",
                 type: "date",
                 format: "{0: dd-MM-yyyy hh:mm:ss}"
             }],
@@ -237,7 +250,7 @@ var Init = {
 
 }
 var SetDataSource = {
-    CallAjx: (url, param, type, elementgrid,tab) => {
+    CallAjx: (url, param, type, elementgrid, tab) => {
         $.ajax({
             url: url,
             data: param,
@@ -269,14 +282,14 @@ var SetDataSource = {
             $(".load").css("display", "none");
             $(".spinner-border").css("display", "inline");
 
-            SetDataSource.CallAjx("/Home/GetTH", { gr: $("#groupid").data('kendoDropDownList').value() , Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#grid'),0)
+            SetDataSource.CallAjx("/Home/GetTH", { gr: $("#groupid").data('kendoDropDownList').value(), Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#grid'), 0)
 
         });
     },
 
     LoadDetail: {
-        CT: (groupID, date) => { SetDataSource.CallAjx("/Home/GetCT", { gr: groupID, Date: date }, "GET", $('#griddetail'),1)},
-        CT1: (groupID, type) => { SetDataSource.CallAjx("/Home/GetCT1", { gr: groupID, type: type }, "GET", $('#griddetail1'),2) }
+        CT: (groupID, date) => { SetDataSource.CallAjx("/Home/GetCT", { gr: groupID, Date: date }, "GET", $('#griddetail'), 1) },
+        CT1: (groupID, type, date) => { SetDataSource.CallAjx("/Home/GetCT1", { gr: groupID, type: type, date: date }, "GET", $('#griddetail1'), 2) }
     },
     FormatDate: (date) => {
         var d = new Date(date),

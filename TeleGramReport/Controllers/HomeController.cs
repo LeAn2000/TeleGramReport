@@ -34,6 +34,7 @@ namespace TeleGramReport.Controllers
 
 		public async Task<IActionResult> Index()
 		{
+			//Adduser(new LoginModel("tony", "12345"));
 			var token = Get("token");
 			if (string.IsNullOrEmpty(token))
 				return View();
@@ -52,6 +53,7 @@ namespace TeleGramReport.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(string username, string password)
 		{
+			
 			var acc = new LoginModel(username, password);
 			var check = await LoginAccess(acc);
 			if (check > 0)
