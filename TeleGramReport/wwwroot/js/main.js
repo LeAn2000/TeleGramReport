@@ -1,7 +1,15 @@
 ﻿$(document).ready(function () {
     Init.InitControl();
     SetDataSource.Load();
-
+    $('#form').submit(function () {
+        $.post($(this).attr('action'), $(this).serialize(), function (json) {
+            $('#form').find("input").val('')
+            SetDataSource.ShowAlert(json)
+        }, 'json');
+        return false; // important to have this
+    });
+    $('#today').text(SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()))
+  
 
 });
 
@@ -91,7 +99,7 @@ var Init = {
                 template: (dataItem) => {
                     return `<h6>${kendo.toString(dataItem.HH, "##,#")}</h6>`
                 }
-            },{
+            }, {
                 field: "Amount",
                 title: "Trúng",
                 template: (dataItem) => {
@@ -151,15 +159,41 @@ var Init = {
                 title: "Ngày",
                 type: "date",
                 format: "{0: dd-MM-yyyy hh:mm:ss}"
-            }],
+            }
+            ],
+        Gift: [
+            {
+                field: "Location",
+                title: "Location",
+
+            },
+            {
+                field: "Num",
+                title: "Số",
+
+            },
+            {
+                field: "Type",
+                title: "Loại",
+
+            },
+            {
+                field: "CreatedDate",
+                title: "Ngày",
+                type: "date",
+                format: "{0: dd-MM-yyyy}"
+
+
+            }]
 
     },
 
     InitGrid: function (element, columns) {
         element.kendoGrid({
             sortable: true,
-            resizable: true,
+            resizable: false,
             reorderable: true,
+            height: "700px",
             pageable: {
                 refresh: true,
                 buttonCount: 5,
@@ -231,20 +265,72 @@ var Init = {
                 }
             })
         });
+        $("#typereport").kendoDropDownList({
+            dataTextField: "Value",
+            dataValueField: "ID",
+            dataSource: [
+                {
+                    "ID": 0, "Value": "Báo cáo"
+                },
+                {
+                    "ID": 1, "Value": "Cập nhật số trúng"
+                }, {
+                    "ID": 3, "Value": "Danh sách số trúng"
+                },
+                {
+                    "ID": 2, "Value": "Cập nhật hoa hồng"
+                },
+            ],
+            select: function (e) {
+                var item = e.item;
+                var text = item.text();
+                if (text == 'Cập nhật số trúng') {
+                   
+                    $('#window').data("kendoWindow").center().open()
+                }
+                else if (text == "Danh sách số trúng") {
+                    $('#group').css("display", "none")
+                    $('#location').css("display", "inline-block")
+                    SetDataSource.SetComlumsName($("#grid"), Init.InitColums.Gift)
+                }
+                else if (text = "Báo cáo") {
+                    $('#location').css("display", "none")
+                    $('#group').css("display", "inline-block")
+                    SetDataSource.SetComlumsName($("#grid"), Init.InitColums.TH)
+                }
+                else {
+
+                }
+                $('#title').text(text)
+            }
+        });
+
+        $("#loc").kendoDropDownList({
+
+        });
 
         var date = new Date();
         $("#date").kendoDatePicker({
             format: "dd/MM/yyyy",
-            value: date,
-            open: function () {
-                var calendar = this.dateView.calendar;
-                calendar.wrapper.width(this.wrapper.width() + 2);
-            }
+            value: date
+
         });
 
         this.InitGrid($("#grid"), this.InitColums.TH);
         this.InitGrid($("#griddetail"), this.InitColums.CT);
         this.InitGrid($("#griddetail1"), this.InitColums.CT1);
+
+        $('#window').kendoWindow({
+            modal: true,
+            width: "600px",
+            height: "600px",
+            title: "Cập nhật số trúng ",
+            visible: false,
+            resizable: false,
+            actions: [
+                "Close"
+            ],
+        });
 
     }
 
@@ -279,11 +365,14 @@ var SetDataSource = {
     ChangeTab: (tab) => { $("#tabstrip").data("kendoTabStrip").select(tab) },
     Load: () => {
         $(".load").click(function () {
+
+
             $(".load").css("display", "none");
-            $(".spinner-border").css("display", "inline");
-
-            SetDataSource.CallAjx("/Home/GetTH", { gr: $("#groupid").data('kendoDropDownList').value(), Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#grid'), 0)
-
+            $(".spinner-border").css("display", "inline-block");
+            if ($('#typereport').val() == 0)
+                SetDataSource.CallAjx("/Home/GetTH", { gr: $("#groupid").data('kendoDropDownList').value(), Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#grid'), 0)
+            else if ($('#typereport').val() == 3)
+                SetDataSource.CallAjx("/Home/GiftReport", { location: "", Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#grid'), 0)
         });
     },
 
@@ -303,6 +392,28 @@ var SetDataSource = {
             day = '0' + day;
 
         return [year, month, day].join('-');
+    },
+    ShowAlert: (json) => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+        })
+        Toast.fire({
+            title: json,
+        })
+        $('.swal2-container').css("z-index", '999999');
+    },
+
+    SetComlumsName: (elementgrid, columns) => {
+        var grid = elementgrid.data("kendoGrid");
+        var options = grid.options;
+        options.columns = columns
+        options.dataSource = [];
+        elementgrid.empty().kendoGrid(options);
+        elementgrid.data("kendoGrid").refresh();
     }
 }
 

@@ -24,24 +24,14 @@ html,
         background-color: #f7f9fb;
     }
 
-.content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #fff;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-}
-
-.collapsible:after {
-    content: "\f0dd"; /* Unicode character for "plus" sign (+) */
-    font-family: "FontAwesome";
-    font-size: 15px;
-    color: #888888;
-    float: right;
-    margin-left: 5px;
-}
+    .collapsible:after {
+        content: "\f0dd"; /* Unicode character for "plus" sign (+) */
+        font-family: "FontAwesome";
+        font-size: 15px;
+        color: #888888;
+        float: right;
+        margin-left: 5px;
+    }
 
 .active:after {
     font-family: "FontAwesome";
@@ -71,35 +61,37 @@ html,
 
 .load,
 .spinner-border {
-    margin: 10px;
-    display: inline;
     font-size: 14px;
-    float: right;
     padding-bottom: 0;
     background: #fff;
 }
 
-.load{
-   
-    display: inline;
-    font-size: 14px;
-    float: right;
-    margin: 10px;
+.load {
     background: #1a73e8;
-    padding: 5px;
     color: #fff;
-    border-radius: 5px;
+    padding: 4px 5px;
+    border-radius: 10px;
+    width: 35px;
+    text-align: center;
+    margin-left: 5px;
+    vertical-align: -0.08em;
+}
+
+i.fa.fa-paper-plane {
+    font-size: 17px;
+    background: #1a73e8;
+    color: #fff;
+    text-align: center;
 }
 
 .spinner-border {
     display: none;
-    padding: 9px;
-    margin-right: 10px;
-    margin-top: 5px;
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
     color: #0088ff;
-    font-size: 11px;
+    font-size: 22px;
+    margin-left: 5px;
+    vertical-align: -0.3em;
 }
 
 
@@ -145,11 +137,22 @@ i {
     border-radius: 4px;
     z-index: 0;
     border-color: black;
+    font-size: 12px
 }
+
 
 .input-gr {
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 200px;
+    margin-left: 10px;
+}
+
+.content {
+    height: auto;
+    margin-top: 10px;
+    border-bottom: 1px solid #1a73e8;
 }
 
 .inputlabel {
@@ -179,9 +182,6 @@ i {
     }
 }
 
-.contain {
-    display: flex !important;
-}
 
 .tab {
     width: 100%;
@@ -193,6 +193,7 @@ i {
     color: #0088ff;
     background: #f7f9fb;
     font-size: 13px;
+    font-weight: bold;
 }
 
 .k-tabstrip-items-wrapper .k-item.k-active {
@@ -224,17 +225,20 @@ button#confirm {
 i.fa.fa-plus {
     color: #3e80ed;
 }
+
 .k-list-item.k-selected.k-hover, .k-list-item.k-selected:hover, .k-selected.k-hover.k-list-optionlabel, .k-selected.k-list-optionlabel:hover {
     color: #000 !important;
     background-color: #fff !important;
 }
+
 .k-list-item.k-selected, .k-selected.k-list-optionlabel {
     color: #000 !important;
     background-color: #fff !important;
 }
+
 h6.click {
     font-size: 14px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 
@@ -248,6 +252,7 @@ span.ck {
     text-align: center;
     padding: 2px 0px;
 }
+
 span.noneck {
     width: 60px;
     border: 1px solid;
@@ -257,9 +262,100 @@ span.noneck {
     text-align: center;
     padding: 2px 0px;
 }
-.ok{
-    color:#19ad0e;
+
+.ok {
+    color: #19ad0e;
 }
+
 .notok {
     color: #fa3131;
+}
+
+.k-input-value-text {
+    background: #fff;
+    font-size: 12px;
+}
+
+.k-cell-inner > .k-link {
+    background: #3e80ed;
+}
+
+.k-column-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background: #3e80ed;
+}
+
+.k-resize-handle {
+    left: 932.5px !important;
+    width: 4px !important;
+}
+
+.k-i-sort-asc-sm::before, .k-i-sort-desc-sm::before {
+    color: #fff;
+    background: #3e80ed;
+}
+
+.k-grid td {
+    border-width: 0 0 1px 1px !important;
+    border-color: #707172 !important;
+}
+
+.k-pager-numbers .k-link.k-selected {
+    color: #ffffff !important;
+    background-color: #3e80ed !important;
+}
+
+.k-picker-solid.k-hover, .k-picker-solid:hover, .k-button-icon, .k-input-button {
+    background-color: #fff !important;
+}
+
+.k-calendar .k-calendar-td.k-selected .k-calendar-cell-inner, .k-calendar .k-calendar-td.k-selected .k-link,
+.k-calendar .k-calendar-td.k-selected:hover .k-link {
+    background-color: #3e80ed;
+}
+
+.k-calendar .k-nav-today, .k-calendar .k-nav-today:hover, .k-calendar .k-calendar-view .k-today {
+    color: #3e80ed;
+}
+
+div.k-grid-footer, div.k-grid-header {
+    background: #3e80ed;
+}
+
+.box input, .childbox input {
+    width: 100px;
+    height: 35px;
+    margin-bottom: 15px;
+    margin-left: 70px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+span#today {
+    float: right;
+    padding: 10px;
+    color: #3e80ed;
+    font-weight: bold;
+}
+
+    span#today:before {
+        content: "Ngày: ";
+        color: black !important;
+    }
+
+#parent {
+    display: flex;
+    justify-content: center;
+    background: #3e80ed;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px
+}
+
+span#title {
+    font-weight: bold;
+    font-size: 20px;
+    background: #3e80ed;
+    color: #fff;
 }

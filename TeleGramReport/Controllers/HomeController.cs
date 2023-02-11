@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -53,7 +54,7 @@ namespace TeleGramReport.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(string username, string password)
 		{
-			
+
 			var acc = new LoginModel(username, password);
 			var check = await LoginAccess(acc);
 			if (check > 0)
@@ -71,6 +72,107 @@ namespace TeleGramReport.Controllers
 
 		}
 
+		[HttpPost]
+		public async Task<JsonResult> InsertGift(string num1,
+			string num2,
+			string num3,
+			string num4,
+			string num5,
+			string num6,
+			string num7,
+			string num8,
+			string num9,
+			string num10,
+			string num11,
+			string num12,
+			string num13,
+			string num14,
+			string num15,
+			string num16,
+			string num17,
+			string num18,
+			string num19,
+			string num20,
+			string num21,
+			string num22,
+			string num23,
+			string num24,
+			string num25,
+			string num26,
+			string num27
+			)
+		{
+			var listnum = new List<string>();
+			listnum.Add(num1);
+			listnum.Add(num2);
+			listnum.Add(num3);
+			listnum.Add(num4);
+			listnum.Add(num5);
+			listnum.Add(num6);
+			listnum.Add(num7);
+			listnum.Add(num8);
+			listnum.Add(num9);
+			listnum.Add(num10);
+			listnum.Add(num11);
+			listnum.Add(num12);
+			listnum.Add(num13);
+			listnum.Add(num14);
+			listnum.Add(num15);
+			listnum.Add(num16);
+			listnum.Add(num17);
+			listnum.Add(num18);
+			listnum.Add(num19);
+			listnum.Add(num20);
+			listnum.Add(num21);
+			listnum.Add(num22);
+			listnum.Add(num23);
+			listnum.Add(num24);
+			listnum.Add(num25);
+			listnum.Add(num26);
+			listnum.Add(num27);
+
+			foreach (var x in listnum)
+			{
+				if (string.IsNullOrEmpty(x))
+					return Json("Bạn chưa điền tất cả các ô");
+			}
+
+			List<InsertGiftModel> list = new List<InsertGiftModel>();
+			for (int i = 0; i<27;i++)
+			{
+				var model = new InsertGiftModel();
+				if (i == 0)
+				{
+					model = new InsertGiftModel("", "d", listnum[i]);
+					
+				}
+				else
+
+					model = new InsertGiftModel("", "", listnum[i]);
+				list.Add(model);
+			}
+
+			string json = JsonConvert.SerializeObject(list);
+			try
+			{
+				await Insert(json);
+				return Json("Cập nhật thành công");
+
+			}
+			catch {
+				return Json("Cập nhật Thất bại");
+
+			}
+
+		}
+		public async Task Insert(string json)
+		{
+
+			var re = await _dp.QueryAsync<dynamic>("telegram..InsertGift", commandType: System.Data.CommandType.StoredProcedure, new
+			{
+				Json = json
+			});
+		}
 		public IActionResult Dashboard()
 		{
 			return View();
@@ -89,7 +191,7 @@ namespace TeleGramReport.Controllers
 		}
 		public async Task<JsonResult> GetCT(double gr, string date)
 		{
-			
+
 			var re = await _dp.QueryAsync<dynamic>("telegram..SalarybyGroupDetail", commandType: System.Data.CommandType.StoredProcedure, new
 			{
 				GroupID = gr,
@@ -100,12 +202,12 @@ namespace TeleGramReport.Controllers
 		}
 		public async Task<JsonResult> GetCT1(double gr, string type)
 		{
-			
+
 			var re = await _dp.QueryAsync<dynamic>("telegram..NumbyType", commandType: System.Data.CommandType.StoredProcedure, new
 			{
 				Type = type,
 				GroupID = gr,
-				
+
 			});
 
 			return Json(re);
@@ -113,11 +215,21 @@ namespace TeleGramReport.Controllers
 		public async Task<JsonResult> Getfilter()
 		{
 
-			var result = await _dp.QueryAsync<dynamic>("telegram..GetFilter",commandType: System.Data.CommandType.StoredProcedure);	
+			var result = await _dp.QueryAsync<dynamic>("telegram..GetFilter", commandType: System.Data.CommandType.StoredProcedure);
 			return Json(result);
 		}
-
 		
+		public async Task<JsonResult> GiftReport(string location, string Date)
+		{
+			var re = await _dp.QueryAsync<dynamic>("telegram..GiftReport", commandType: System.Data.CommandType.StoredProcedure, new
+			{
+				location = location,
+				Date = Date
+			}); ;
+
+			return Json(re);
+		}
+
 		public string Get(string key)
 		{
 			return Request.Cookies[key];
