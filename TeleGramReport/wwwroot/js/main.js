@@ -40,7 +40,7 @@ var Init = {
                     var groupid = dataItem.GroupID;
                     var date = `"${SetDataSource.FormatDate($("#date").data("kendoDatePicker").value())}"`;
                     return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT(${groupid},${date})'>${kendo.toString(dataItem.value, "##,#")}</h6>`
-                }
+                },
             },
             {
                 field: "CreatedDate",

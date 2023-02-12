@@ -243,7 +243,7 @@ h6.click {
 
 
 span.ck {
-    width: 60px;
+    min-width: 60px;
     border: 1px solid;
     border-radius: 5px;
     background: #1a73e8;
@@ -254,7 +254,8 @@ span.ck {
 }
 
 span.noneck {
-    width: 60px;
+    min-width: 60px;
+    max-width:130px;
     border: 1px solid;
     border-radius: 5px;
     background: #f7f9fb;
