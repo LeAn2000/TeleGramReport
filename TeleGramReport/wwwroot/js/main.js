@@ -5,16 +5,11 @@
         $.post($(this).attr('action'), $(this).serialize(), function (json) {
             $('#form').find("input").val('')
             SetDataSource.ShowAlert(json)
-            $('#typereport').data("kendoDropDownList").select(2);
-            $('#typereport').data("kendoDropDownList").trigger("change")
-
-            $('#window').data("kendoWindow").close()
-
         }, 'json');
         return false; // important to have this
     });
     $('#today').text(SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()))
-
+  
 
 });
 
@@ -40,13 +35,39 @@ var Init = {
                     var groupid = dataItem.GroupID;
                     var date = `"${SetDataSource.FormatDate($("#date").data("kendoDatePicker").value())}"`;
                     return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT(${groupid},${date})'>${kendo.toString(dataItem.value, "##,#")}</h6>`
+<<<<<<< HEAD
                 },
+=======
+                }
+            }, {
+                field: "HH",
+                title: "Hoa Hồng",
+                template: (dataItem) => {
+                    return `<h6>${kendo.toString(dataItem.HH, "##,#")}</h6>`
+                }
+            }, {
+                field: "Amount",
+                title: "Trúng",
+                template: (dataItem) => {
+                    return `<h6>${kendo.toString(dataItem.Amount, "##,#")}</h6>`
+                }
+
+            }, {
+                field: "Earn",
+                title: "Thắng/Thua",
+                type: "int",
+                template: (dataItem) => {
+                    if (dataItem.Earn > 0)
+                        return `<h6 class='ok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
+                }
+>>>>>>> parent of 527045d (Update main.js)
             },
             {
                 field: "CreatedDate",
                 title: "Ngày",
                 type: "date",
-                format: "{0: dd-MM-yyyy}"
+                format: "{0: dd-MM-yyyy hh:mm:ss}"
             }],
         CT:
             [{
@@ -102,7 +123,7 @@ var Init = {
                 field: "CreatedDate",
                 title: "Ngày",
                 type: "date",
-                format: "{0: dd-MM-yyyy}"
+                format: "{0: dd-MM-yyyy hh:mm:ss}"
             }],
         CT1:
             [{
@@ -147,11 +168,7 @@ var Init = {
         Gift: [
             {
                 field: "Location",
-                title: "Đài",
-
-            }, {
-                field: "Type",
-                title: "Kiểu chơi",
+                title: "Location",
 
             },
             {
@@ -159,7 +176,11 @@ var Init = {
                 title: "Số",
 
             },
+            {
+                field: "Type",
+                title: "Loại",
 
+            },
             {
                 field: "CreatedDate",
                 title: "Ngày",
@@ -262,13 +283,13 @@ var Init = {
                 },
                 {
                     "ID": 2, "Value": "Cập nhật hoa hồng"
-                }
+                },
             ],
             select: function (e) {
                 var item = e.item;
                 var text = item.text();
                 if (text == 'Cập nhật số trúng') {
-
+                   
                     $('#window').data("kendoWindow").center().open()
                 }
                 else if (text == "Danh sách số trúng") {
