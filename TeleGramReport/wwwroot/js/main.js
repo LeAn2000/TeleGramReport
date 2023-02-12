@@ -35,39 +35,13 @@ var Init = {
                     var groupid = dataItem.GroupID;
                     var date = `"${SetDataSource.FormatDate($("#date").data("kendoDatePicker").value())}"`;
                     return `<h6 class='click' onClick='SetDataSource.LoadDetail.CT(${groupid},${date})'>${kendo.toString(dataItem.value, "##,#")}</h6>`
-<<<<<<< HEAD
-                },
-=======
                 }
-            }, {
-                field: "HH",
-                title: "Hoa Hồng",
-                template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.HH, "##,#")}</h6>`
-                }
-            }, {
-                field: "Amount",
-                title: "Trúng",
-                template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.Amount, "##,#")}</h6>`
-                }
-
-            }, {
-                field: "Earn",
-                title: "Thắng/Thua",
-                type: "int",
-                template: (dataItem) => {
-                    if (dataItem.Earn > 0)
-                        return `<h6 class='ok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
-                    return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
-                }
->>>>>>> parent of 527045d (Update main.js)
             },
             {
                 field: "CreatedDate",
                 title: "Ngày",
                 type: "date",
-                format: "{0: dd-MM-yyyy hh:mm:ss}"
+                format: "{0: dd-MM-yyyy}"
             }],
         CT:
             [{
@@ -123,7 +97,7 @@ var Init = {
                 field: "CreatedDate",
                 title: "Ngày",
                 type: "date",
-                format: "{0: dd-MM-yyyy hh:mm:ss}"
+                format: "{0: dd-MM-yyyy}"
             }],
         CT1:
             [{
