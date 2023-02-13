@@ -155,7 +155,7 @@ namespace TeleGramReport.Controllers
 			string json = JsonConvert.SerializeObject(list);
 			try
 			{
-				await Insert(json);
+				await Insert(json, "telegram..InsertGift");
 				return Json("Cập nhật thành công");
 
 			}
@@ -165,14 +165,69 @@ namespace TeleGramReport.Controllers
 			}
 
 		}
-		public async Task Insert(string json)
+
+		[HttpPost]
+		public async Task<string> InsertQuota(string json, string sp)
+		{
+			try
+			{
+				await Insert(json, sp);
+				return "Cập nhật thành công";
+			}
+			catch(Exception e)
+			{
+				return e.Message;
+			}
+			
+		}
+
+		[HttpPost]
+		public async Task<string> AddSalaryByGroup( string gr,string json)
+		{
+			try
+			{
+				var re = await _dp.QueryAsync<dynamic>("telegram..AddSalaryByGroup", commandType: System.Data.CommandType.StoredProcedure, new
+				{
+					GroupID = gr,
+					Json = json
+				});
+				return "Cập nhật thành công";
+			}
+			catch (Exception e)
+			{
+				return e.Message;
+			}
+
+		}
+
+		public async Task<JsonResult> QuotaReport(string gr)
+		{
+			var re = await _dp.QueryAsync<dynamic>("telegram..QuotaReport", commandType: System.Data.CommandType.StoredProcedure, new
+			{
+				GroupID = gr
+			});
+
+			return Json(re);
+		}
+
+		public async Task<JsonResult> HHReport(string gr)
+		{
+			var re = await _dp.QueryAsync<dynamic>("telegram..ListSalaryByGroup", commandType: System.Data.CommandType.StoredProcedure, new
+			{
+				GroupID = gr
+			});
+
+			return Json(re);
+		}
+		public async Task Insert(string json, string spname)
 		{
 
-			var re = await _dp.QueryAsync<dynamic>("telegram..InsertGift", commandType: System.Data.CommandType.StoredProcedure, new
+			var re = await _dp.QueryAsync<dynamic>(spname, commandType: System.Data.CommandType.StoredProcedure, new
 			{
 				Json = json
 			});
 		}
+	
 		public IActionResult Dashboard()
 		{
 			return View();

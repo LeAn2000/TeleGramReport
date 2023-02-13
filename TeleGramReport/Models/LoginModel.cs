@@ -47,4 +47,34 @@ namespace TeleGramReport.Models
 		{
 		}
 	}
+	public class InsertQuotaModel
+	{
+		public string GroupID { get; set; }
+		public string Type { get; set; }
+		public int Quota { get; set; }
+
+		public InsertQuotaModel(string groupID, string type, int quota)
+		{
+			GroupID = groupID;
+			Type = type;
+			Quota = quota;
+		}
+
+		public InsertQuotaModel()
+		{
+		}
+	}
+
+	public class Filter
+	{
+
+		public double GroupID { get; set; }
+		public string GroupName { get; set; }
+
+		public Filter(double groupID, string groupName)
+		{
+			GroupID = groupID;
+			GroupName = groupName;
+		}
+	}
 }
