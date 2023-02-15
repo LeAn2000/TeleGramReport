@@ -75,72 +75,76 @@
 
     <div id="window">
         <div class="gift">
-            <form id="form" method="post" action="/Home/InsertGift">
-                <span id="today"></span>
-                <div class="box"><input class="finput" min="0" name="num1" type="number" placeholder="đề" /></div>
-                <div class="childbox">
-                    <input name="num2" min="0" type="number" placeholder="số" />
-                    <input name="num3" min="0" type="number" placeholder="số" />
-                    <input name="num4" min="0" type="number" placeholder="số" />
-                </div>
-                <div class="childbox">
-                    <input name="num5" min="0" type="number" placeholder="số" class="finput" />
-                    <input name="num6" min="0" type="number" placeholder="số" />
-                    <input name="num7"  min="0"type="number" placeholder="số" />
-                </div>
-                <div class="childbox">
-                    <input name="num8" min="0" type="number" placeholder="số" class="finput" />
-                    <input name="num9" min="0" type="number" placeholder="số" />
-                    <input name="num10"  min="0"type="number" placeholder="số" />
-                </div>
-                <div class="childbox">
-                    <input name="num11" min="0" type="number" placeholder="số" class="finput" />
-                    <input name="num12" min="0" type="number" placeholder="số" />
-                    <input name="num13" min="0" type="number" placeholder="số" />
-                </div>
-                <div class="childbox">
-                    <input name="num14" min="0" type="number" placeholder="số" class="finput" />
-                    <input name="num15" min="0" type="number" placeholder="số" />
-                    <input name="num16" min="0" type="number" placeholder="số" />
-                </div>
-                <div class="childbox">
-                    <input name="num17" min="0" type="number" placeholder="số" class="finput" />
-                    <input name="num18" min="0" type="number" placeholder="số" />
-                    <input name="num19" min="0" type="number" placeholder="số" />
-                </div>
-                <div class="childbox">
-                    <input name="num20" min="0" type="number" placeholder="số" class="finput" />
-                    <input name="num21" min="0" type="number" placeholder="số" />
-                    <input name="num22" min="0" type="number" placeholder="số" />
-                </div>
-                <div class="childbox">
-                    <input name="num23" min="0" type="number" placeholder="số" class="finput" />
-                    <input name="num24" min="0" type="number" placeholder="số" />
-                    <input name="num25" min="0" type="number" placeholder="số" />
-                </div>
-                <div class="childbox">
-                    <input name="num26" min="0" type="number" placeholder="số" class="finput" />
-                    <input name="num27" min="0" type="number" placeholder="số" />
-                </div>
-                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Cập nhật</button>
-            </form>
+            <div style="display:flex; justify-content:center">
+                <form id="form" method="post" action="/Home/InsertGift">
+                    <span id="today"></span>
+                    <div class="box"><input class="finput" min="0" name="num1" type="number" placeholder="đề" /></div>
+                    <div class="childbox">
+                        <input name="num2" min="0" type="number" placeholder="số" />
+                        <input name="num3" min="0" type="number" placeholder="số" />
+                        <input name="num4" min="0" type="number" placeholder="số" />
+                    </div>
+                    <div class="childbox">
+                        <input name="num5" min="0" type="number" placeholder="số" class="finput" />
+                        <input name="num6" min="0" type="number" placeholder="số" />
+                        <input name="num7" min="0" type="number" placeholder="số" />
+                    </div>
+                    <div class="childbox">
+                        <input name="num8" min="0" type="number" placeholder="số" class="finput" />
+                        <input name="num9" min="0" type="number" placeholder="số" />
+                        <input name="num10" min="0" type="number" placeholder="số" />
+                    </div>
+                    <div class="childbox">
+                        <input name="num11" min="0" type="number" placeholder="số" class="finput" />
+                        <input name="num12" min="0" type="number" placeholder="số" />
+                        <input name="num13" min="0" type="number" placeholder="số" />
+                    </div>
+                    <div class="childbox">
+                        <input name="num14" min="0" type="number" placeholder="số" class="finput" />
+                        <input name="num15" min="0" type="number" placeholder="số" />
+                        <input name="num16" min="0" type="number" placeholder="số" />
+                    </div>
+                    <div class="childbox">
+                        <input name="num17" min="0" type="number" placeholder="số" class="finput" />
+                        <input name="num18" min="0" type="number" placeholder="số" />
+                        <input name="num19" min="0" type="number" placeholder="số" />
+                    </div>
+                    <div class="childbox">
+                        <input name="num20" min="0" type="number" placeholder="số" class="finput" />
+                        <input name="num21" min="0" type="number" placeholder="số" />
+                        <input name="num22" min="0" type="number" placeholder="số" />
+                    </div>
+                    <div class="childbox">
+                        <input name="num23" min="0" type="number" placeholder="số" class="finput" />
+                        <input name="num24" min="0" type="number" placeholder="số" />
+                        <input name="num25" min="0" type="number" placeholder="số" />
+                    </div>
+                    <div class="childbox">
+                        <input name="num26" min="0" type="number" placeholder="số" class="finput" />
+                        <input name="num27" min="0" type="number" placeholder="số" />
+                    </div>
+                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Cập nhật</button>
+                </form>
+            </div>
         </div>
         <div class="quota" style="display:none">
+           
                 <div class="input-gr">
                     <input id="groupid1" type="text" class="inputfield" />
                     <label for="name" class="inputlabel">Nhóm</label>
                 </div>
                 <div class="childbox">
-                <input id="d8" min="0" type="number" placeholder="d8" class="finput" />
-                <input id="d9" min="0" type="number" placeholder="d9" />
-                <input id="lo" min="0" type="number" placeholder="lo" />
+                    <input id="d8" min="0" type="number" placeholder="d8" class="finput" />
+                    <input id="d9" min="0" type="number" placeholder="d9" />
+                    <input id="lo" min="0" type="number" placeholder="lo" />
                 </div>
                 <div class="childbox">
-                <input id="x2" min="0" type="number" placeholder="x2" class="finput" />
-                <input id="x3" min="0" type="number" placeholder="x3" />
-                <input id="x4" min="0" type="number" placeholder="x4" />
+                    <input id="x2" min="0" type="number" placeholder="x2" class="finput" />
+                    <input id="x3" min="0" type="number" placeholder="x3" />
+                    <input id="x4" min="0" type="number" placeholder="x4" />
                 </div>
                 <button type="submit" id="update" class="form-control btn btn-primary rounded submit px-3">Cập nhật</button>
+            
         </div>
 
     </div>
