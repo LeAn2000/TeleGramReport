@@ -352,12 +352,14 @@ var Init = {
                     $('.quota').css("display", "none")
                     $('.gift').css("display", "block")
                     SetDataSource.SetComlumsName($("#grid"), Init.InitColums.Gift)
+                    $(".k-window-title").text(text);
                 }
                 else if (text == 'Cập nhật hạn mức') {
                     $('#window').data("kendoWindow").center().open()
                     $('.gift').css("display", "none")
                     $('.quota').css("display", "block")
                     SetDataSource.SetComlumsName($("#grid"), Init.InitColums.Quota)
+                    $(".k-window-title").text(text);
                 }
                 else if (text == "Danh sách số trúng") {
                     $('#group').css("display", "none")
