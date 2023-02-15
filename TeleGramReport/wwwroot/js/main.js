@@ -44,7 +44,7 @@ var Init = {
                 field: "CreatedDate",
                 title: "Ngày",
                 type: "date",
-                format: "{0: dd-MM-yyyy HH:mm:ss }"
+                format: "{0: dd-MM-yyyy}"
             }],
         CT:
             [{
@@ -101,12 +101,12 @@ var Init = {
                 },
                 footerTemplate: "#=sum#"
             },
-            {
-                field: "CreatedDate",
-                title: "Ngày",
-                type: "date",
-                format: "{0: dd-MM-yyyy HH:mm:ss}"
-            }],
+                {
+                    field: "CreatedDate",
+                    title: "Ngày",
+                    type: "date",
+                    format: "{0: dd-MM-yyyy}"
+                }],
         CT1:
             [{
                 field: "Num",
@@ -140,12 +140,12 @@ var Init = {
                     return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
                 }, footerTemplate: "#=sum#"
             },
-            {
-                field: "CreatedDate",
-                title: "Ngày",
-                type: "date",
-                format: "{0: dd-MM-yyyy HH:mm:ss}"
-            }
+                {
+                    field: "CreatedDate",
+                    title: "Ngày",
+                    type: "date",
+                    format: "{0:dd-MM-yyyy HH:mm}"
+                }
             ],
         Gift: [
             {
@@ -403,9 +403,9 @@ var Init = {
         Init.InitGrid($("#griddetail1"));
         $('#window').kendoWindow({
             modal: true,
-            width: "600px",
             height: "600px",
-            title: "Cập nhật số trúng ",
+            width: "600px",
+            title: "Cập nhật số trúng",
             visible: false,
             resizable: false,
             actions: [
@@ -440,8 +440,6 @@ var SetDataSource = {
 
             },
         })
-
-
     },
     CallAjxaggregate: (url, param, type, elementgrid, tab, columns) => {
         var data = new kendo.data.DataSource({
@@ -467,6 +465,7 @@ var SetDataSource = {
                         HH: { type: "number" },
                         Value: { type: "number" },
                         Earn: { type: "number" },
+                        CreatedDate: { type: "date" }
 
                     }
                 }

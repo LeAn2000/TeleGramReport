@@ -380,7 +380,7 @@ i {
     border-color: #fff;
 
 }
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 820px) {
     .inputgrid {
         width: 50px
     }
@@ -403,8 +403,12 @@ i {
     .box input, .childbox input {
         width: 50px;
         height: 35px;
-      
         margin-left: 50px;
        
     }
+
+}
+.gift{
+    display:flex  !important;
+    justify-content:center;
 }
