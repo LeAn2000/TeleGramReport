@@ -2,13 +2,15 @@
     Init.InitControl();
     SetDataSource.Load();
     SetDataSource.InserQuota();
+
+    //Số trúng reponse after update
     $('#form').submit(function () {
         $.post($(this).attr('action'), $(this).serialize(), function (json) {
             $('#form').find("input").val('')
             SetDataSource.ShowAlert(json)
+            SetDataSource.ChangeTab($("#sotrung"), 1)
+            $(".load").trigger('click');
         }, 'json');
-        $('#window').data("kendoWindow").close();
-        $('#typereport').data('kendoDropDownList').select(2)
         return false;
     });
     $('#today').text(SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()))
@@ -17,7 +19,7 @@
 });
 
 
-
+var flag = 1;
 var Init = {
     InitColums: {
         TH:
@@ -101,12 +103,12 @@ var Init = {
                 },
                 footerTemplate: "#=sum#"
             },
-                {
-                    field: "CreatedDate",
-                    title: "Ngày",
-                    type: "date",
-                    format: "{0: dd-MM-yyyy}"
-                }],
+            {
+                field: "CreatedDate",
+                title: "Ngày",
+                type: "date",
+                format: "{0: dd-MM-yyyy}"
+            }],
         CT1:
             [{
                 field: "Num",
@@ -140,12 +142,12 @@ var Init = {
                     return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
                 }, footerTemplate: "#=sum#"
             },
-                {
-                    field: "CreatedDate",
-                    title: "Ngày",
-                    type: "date",
-                    format: "{0:dd-MM-yyyy HH:mm}"
-                }
+            {
+                field: "CreatedDate",
+                title: "Ngày",
+                type: "date",
+                format: "{0:dd-MM-yyyy HH:mm}"
+            }
             ],
         Gift: [
             {
@@ -249,6 +251,46 @@ var Init = {
                 },
             },
         });
+        $("#parenttab").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn",
+                },
+            },
+            select: function (e) {
+                var item = e.item.innerText;
+                item = item.toLowerCase();
+                if (item == "số trúng") {
+                    flag = 2;
+                    $('#group').css("display", "none")
+                    $('#location').css("display", "inline-block")
+                    return;
+                }
+                else if (item == "hạn mức")
+                    flag = 3;
+                else if (item == "hoa hồng")
+                    flag = 4;
+                else
+                    flag = 1;
+                $('#group').css("display", "inline-block" )
+                $('#location').css("display", "none")
+            }
+        });
+        $("#sotrung").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn",
+                },
+            },
+        });
+        $("#hanmuc").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn",
+                },
+            },
+        });
+
         var coll = document.getElementsByClassName("collapsible");
         var i;
 
@@ -321,73 +363,6 @@ var Init = {
                 }
             })
         });
-        $("#typereport").kendoDropDownList({
-            dataTextField: "Value",
-            dataValueField: "ID",
-            dataSource: [
-                {
-                    "ID": 0, "Value": "Báo cáo"
-                },
-                {
-                    "ID": 2, "Value": "Cập nhật hoa hồng"
-                },
-                {
-                    "ID": 1, "Value": "Cập nhật số trúng"
-                }, {
-                    "ID": 3, "Value": "Danh sách số trúng"
-                },
-                {
-                    "ID": 4, "Value": "Cập nhật hạn mức"
-                }, {
-                    "ID": 5, "Value": "Danh sách hạn mức"
-                },
-
-            ],
-            select: function (e) {
-                var item = e.item;
-                var text = item.text();
-                $('#datee').css("display", "inline-block")
-                if (text == 'Cập nhật số trúng') {
-                    $('#window').data("kendoWindow").center().open()
-                    $('.quota').css("display", "none")
-                    $('.gift').css("display", "block")
-                    SetDataSource.SetComlumsName($("#grid"), Init.InitColums.Gift)
-                    $(".k-window-title").text(text);
-                }
-                else if (text == 'Cập nhật hạn mức') {
-                    $('#window').data("kendoWindow").center().open()
-                    $('.gift').css("display", "none")
-                    $('.quota').css("display", "block")
-                    SetDataSource.SetComlumsName($("#grid"), Init.InitColums.Quota)
-                    $(".k-window-title").text(text);
-                }
-                else if (text == "Danh sách số trúng") {
-                    $('#group').css("display", "none")
-                    $('#location').css("display", "inline-block")
-                    SetDataSource.SetComlumsName($("#grid"), Init.InitColums.Gift)
-                }
-                else if (text == "Báo cáo") {
-
-                    $('#location').css("display", "none")
-                    $('#group').css("display", "inline-block")
-                    SetDataSource.SetComlumsName($("#grid"), Init.InitColums.TH)
-                }
-                else if (text == "Danh sách hạn mức") {
-                    SetDataSource.SetComlumsName($("#grid"), Init.InitColums.Quota)
-                    $('#location').css("display", "none")
-                    $('#group').css("display", "inline-block")
-                    $('#datee').css("display", "none")
-                }
-                else {
-                    $('#location').css("display", "none")
-                    $('#group').css("display", "inline-block")
-                    $('#datee').css("display", "none")
-                    SetDataSource.SetComlumsName($("#grid"), Init.InitColums.HH, 1)
-                }
-                $('#groupid').data('kendoDropDownList').select(0)
-                $('#title').text(text)
-            }
-        });
 
         $("#loc").kendoDropDownList({
 
@@ -403,17 +378,10 @@ var Init = {
         this.InitGrid($("#grid"), this.InitColums.TH);
         Init.InitGrid($("#griddetail"));
         Init.InitGrid($("#griddetail1"));
-        $('#window').kendoWindow({
-            modal: true,
-            height: "600px",
-            width: "600px",
-            title: "Cập nhật số trúng",
-            visible: false,
-            resizable: false,
-            actions: [
-                "Close"
-            ],
-        });
+        Init.InitGrid($("#gridsotrung"), this.InitColums.Gift);
+        Init.InitGrid($("#gridhanmuc"), this.InitColums.Quota);
+        Init.InitGrid($("#gridhoahong"), this.InitColums.HH);
+
 
     }
 
@@ -433,7 +401,7 @@ var SetDataSource = {
                 elementgrid.data("kendoGrid").refresh();
                 $(".load").css("display", "inline");
                 $(".spinner-border").css("display", "none");
-                SetDataSource.ChangeTab(tab)
+             
             },
             error: function (err) {
                 console.log(err)
@@ -488,30 +456,26 @@ var SetDataSource = {
         elementgrid.data("kendoGrid").refresh();
         $(".load").css("display", "inline");
         $(".spinner-border").css("display", "none");
-        SetDataSource.ChangeTab(tab)
+        SetDataSource.ChangeTab($("#tabstrip"), tab)
+       
 
     },
-    ChangeTab: (tab) => { $("#tabstrip").data("kendoTabStrip").select(tab) },
+    ChangeTab: (element, tab) => { element.data("kendoTabStrip").select(tab)},
     Load: () => {
         $(".load").click(function () {
-
-
             $(".load").css("display", "none");
             $(".spinner-border").css("display", "inline-block");
-            if ($('#typereport').val() == 0)
-                SetDataSource.CallAjx("/Home/GetTH", { gr: $("#groupid").data('kendoDropDownList').value(), Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#grid'), 0)
-            else if ($('#typereport').val() == 3)
-                SetDataSource.CallAjx("/Home/GiftReport", { location: "", Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#grid'), 0)
-            else if ($('#typereport').val() == 5)
-                SetDataSource.CallAjx("/Home/QuotaReport", { gr: $("#groupid").data('kendoDropDownList').value() }, "GET", $('#grid'), 0)
-            else if ($('#typereport').val() == 2)
-                SetDataSource.CallAjx("/Home/HHReport", { gr: $("#groupid").data('kendoDropDownList').value() }, "GET", $('#grid'), 0)
-            else if ($('#typereport').val() == 1 || $('#typereport').val() == 4) {
-                $('#window').data("kendoWindow").center().open()
-                $(".load").css("display", "inline");
-                $(".spinner-border").css("display", "none");
-
+            if (flag == 1)
+                SetDataSource.CallAjx("/Home/GetTH", { gr: $("#groupid").data('kendoDropDownList').value(), Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#grid'))
+            else if (flag == 2)
+                SetDataSource.CallAjx("/Home/GiftReport", { location: "", Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#gridsotrung'))
+            else if (flag == 3)
+                SetDataSource.CallAjx("/Home/QuotaReport", { gr: $("#groupid").data('kendoDropDownList').value() }, "GET", $('#gridhanmuc'))
+            else if (flag == 4) { 
+                SetDataSource.SetComlumsName($("#gridhoahong"), Init.InitColums.HH, 1)
+                SetDataSource.CallAjx("/Home/HHReport", { gr: $("#groupid").data('kendoDropDownList').value() }, "GET", $('#gridhoahong'))
             }
+               
         });
     },
 
@@ -567,7 +531,7 @@ var SetDataSource = {
         var x3 = $('#x3').val();
         var x4 = $('#x4').val();
 
-        var grID = $("#groupid1").data('kendoDropDownList').value();
+        var grID = $("#groupid").data('kendoDropDownList').value();
 
         var data = [
             { "GroupID": grID, "Type": "d8", "Quota": d8 },
@@ -590,8 +554,8 @@ var SetDataSource = {
                 success: function (result) {
                     SetDataSource.ShowAlert(result);
                     $('.quota').find("input").val('')
-                    $('#window').data("kendoWindow").close();
-                    $('#typereport').data('kendoDropDownList').select(4)
+                    SetDataSource.ChangeTab($("#hanmuc"),1);
+                    $(".load").trigger('click');
                 },
                 error: function (err) {
                     SetDataSource.ShowAlert(err);
@@ -604,7 +568,7 @@ var SetDataSource = {
     Change: (e) => {
         var id = e.getAttribute("id");
         var a = e.getAttribute("data-uid");
-        var grid = $('#grid').data("kendoGrid")
+        var grid = $('#gridhoahong').data("kendoGrid")
         var data = grid.dataSource.data();
         var item = data.find(x => x.uid == a)
         item.HH = $('#' + id).val();
@@ -613,7 +577,7 @@ var SetDataSource = {
     },
     Update: () => {
         var grID = $("#groupid").data('kendoDropDownList').value();
-        var grid = $('#grid').data("kendoGrid")
+        var grid = $('#gridhoahong').data("kendoGrid")
         var data = grid.dataSource.data();
         var item = data.filter(x => x.dirty == true).map(x => ({ Location: "", Type: x.Type, HH: x.HH }));
         var data = JSON.stringify(item);

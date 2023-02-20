@@ -151,235 +151,242 @@ i {
 
 
 
-    .content {
-        height: auto;
-        margin-top: 10px;
-        border-bottom: 1px solid #1a73e8;
+.content {
+    height: auto;
+    margin-top: 10px;
+    border-bottom: 1px solid #1a73e8;
+    position: absolute;
+    top: 0;
+    z-index: 500;
+    left: 20%;
+}
+
+.inputlabel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 3%;
+    color: rgb(87, 85, 85);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.inputfield + .inputlabel {
+    top: -2px;
+    padding: 0 5px;
+    display: inline-block;
+    background: #fff;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
     }
 
-    .inputlabel {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 3%;
-        color: rgb(87, 85, 85);
-        font-size: 12px;
-        font-weight: 700;
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.tab {
+    width: 100%;
+    height: fit-content;
+    margin-top: 10px;
+}
+
+.k-tabstrip-items .k-link {
+    color: #0088ff;
+    background: #f7f9fb;
+    font-size: 13px ;
+    font-weight: bold;
+    text-transform: uppercase
+}
+
+.k-tabstrip-items-wrapper .k-item.k-active {
+    border-color: #f7f9fb;
+    border-bottom-color: #0088ff !important;
+    border-bottom-width: 3px;
+}
+
+.k-toolbar {
+    padding: 0;
+}
+
+#selectall {
+    margin: 8px;
+}
+
+#count {
+    padding-right: 10px;
+    border-right: 2px solid #b3b4b5;
+    padding-top: 5px;
+}
+
+button#confirm {
+    border: 2px solid;
+    color: #f7f7f7;
+  
+    background: #3e80ed;
+    padding: 6px;
+    border-radius: 6px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+
+
+i.fa.fa-plus {
+    color: #ffffff;
+    background: #3e80ed;
+}
+
+.k-toolbar {
+    background: #3e80ed;
+}
+
+.k-list-item.k-selected.k-hover, .k-list-item.k-selected:hover, .k-selected.k-hover.k-list-optionlabel, .k-selected.k-list-optionlabel:hover {
+    color: #000 !important;
+    background-color: #fff !important;
+}
+
+.k-list-item.k-selected, .k-selected.k-list-optionlabel {
+    color: #000 !important;
+    background-color: #fff !important;
+}
+
+h6.click {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+span.ck {
+    min-width: 60px;
+    border: 1px solid;
+    border-radius: 5px;
+    background: #1a73e8;
+    color: white;
+    display: block;
+    text-align: center;
+    padding: 2px 0px;
+}
+
+span.noneck {
+    min-width: 60px;
+    max-width: 130px;
+    border: 1px solid;
+    border-radius: 5px;
+    background: #f7f9fb;
+    display: block;
+    text-align: center;
+    padding: 2px 0px;
+}
+
+.ok {
+    color: #19ad0e;
+}
+
+.notok {
+    color: #fa3131;
+}
+
+.k-input-value-text {
+    background: #fff;
+    font-size: 12px;
+}
+
+.k-cell-inner > .k-link {
+    background: #3e80ed;
+}
+
+.k-column-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background: #3e80ed;
+}
+
+.k-resize-handle {
+    left: 932.5px !important;
+    width: 4px !important;
+}
+
+.k-i-sort-asc-sm::before, .k-i-sort-desc-sm::before {
+    color: #fff;
+    background: #3e80ed;
+}
+
+.k-grid td {
+    border-width: 0 0 1px 1px !important;
+    border-color: #707172 !important;
+}
+
+.k-pager-numbers .k-link.k-selected {
+    color: #ffffff !important;
+    background-color: #3e80ed !important;
+}
+
+.k-picker-solid.k-hover, .k-picker-solid:hover, .k-button-icon, .k-input-button {
+    background-color: #fff !important;
+}
+
+.k-calendar .k-calendar-td.k-selected .k-calendar-cell-inner, .k-calendar .k-calendar-td.k-selected .k-link,
+.k-calendar .k-calendar-td.k-selected:hover .k-link {
+    background-color: #3e80ed;
+}
+
+.k-calendar .k-nav-today, .k-calendar .k-nav-today:hover, .k-calendar .k-calendar-view .k-today {
+    color: #3e80ed;
+}
+
+div.k-grid-footer, div.k-grid-header {
+    background: #3e80ed;
+}
+
+.box input, .childbox input {
+    width: 100px;
+    height: 35px;
+    margin-bottom: 15px;
+    margin-left: 70px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+span#today {
+    float: right;
+    padding: 10px;
+    color: #3e80ed;
+    font-weight: bold;
+}
+
+    span#today:before {
+        content: "Ngày: ";
+        color: black !important;
     }
 
-    .inputfield + .inputlabel {
-        top: -2px;
-        padding: 0 5px;
-        display: inline-block;
-        background: #fff;
-    }
+#parent {
+    display: flex;
+    justify-content: center;
+    background: #3e80ed;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px
+}
 
-    @keyframes fade-in {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
-    }
-
-
-    .tab {
-        width: 100%;
-        height: fit-content;
-        margin-top: 10px;
-    }
-
-    .k-tabstrip-items .k-link {
-        color: #0088ff;
-        background: #f7f9fb;
-        font-size: 13px;
-        font-weight: bold;
-    }
-
-    .k-tabstrip-items-wrapper .k-item.k-active {
-        border-color: #f7f9fb;
-        border-bottom-color: #0088ff !important;
-        border-bottom-width: 3px;
-    }
-
-    .k-toolbar {
-        padding: 0;
-    }
-
-    #selectall {
-        margin: 8px;
-    }
-
-    #count {
-        padding-right: 10px;
-        border-right: 2px solid #b3b4b5;
-        padding-top: 5px;
-    }
-
-    button#confirm {
-        border: 2px solid;
-        color: #f7f7f7;
-        margin-left: 10px;
-        background: #3e80ed;
-        padding: 5px;
-        border-radius: 6px;
-        margin-top: 2px;
-        font-weight: bold
-    }
-
-    i.fa.fa-plus {
-        color: #ffffff;
-        background: #3e80ed;
-    }
-
-    .k-toolbar {
-        background: #3e80ed;
-    }
-
-    .k-list-item.k-selected.k-hover, .k-list-item.k-selected:hover, .k-selected.k-hover.k-list-optionlabel, .k-selected.k-list-optionlabel:hover {
-        color: #000 !important;
-        background-color: #fff !important;
-    }
-
-    .k-list-item.k-selected, .k-selected.k-list-optionlabel {
-        color: #000 !important;
-        background-color: #fff !important;
-    }
-
-    h6.click {
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-
-    span.ck {
-        min-width: 60px;
-        border: 1px solid;
-        border-radius: 5px;
-        background: #1a73e8;
-        color: white;
-        display: block;
-        text-align: center;
-        padding: 2px 0px;
-    }
-
-    span.noneck {
-        min-width: 60px;
-        max-width: 130px;
-        border: 1px solid;
-        border-radius: 5px;
-        background: #f7f9fb;
-        display: block;
-        text-align: center;
-        padding: 2px 0px;
-    }
-
-    .ok {
-        color: #19ad0e;
-    }
-
-    .notok {
-        color: #fa3131;
-    }
-
-    .k-input-value-text {
-        background: #fff;
-        font-size: 12px;
-    }
-
-    .k-cell-inner > .k-link {
-        background: #3e80ed;
-    }
-
-    .k-column-title {
-        font-size: 15px;
-        font-weight: bold;
-        color: #fff;
-        background: #3e80ed;
-    }
-
-    .k-resize-handle {
-        left: 932.5px !important;
-        width: 4px !important;
-    }
-
-    .k-i-sort-asc-sm::before, .k-i-sort-desc-sm::before {
-        color: #fff;
-        background: #3e80ed;
-    }
-
-    .k-grid td {
-        border-width: 0 0 1px 1px !important;
-        border-color: #707172 !important;
-    }
-
-    .k-pager-numbers .k-link.k-selected {
-        color: #ffffff !important;
-        background-color: #3e80ed !important;
-    }
-
-    .k-picker-solid.k-hover, .k-picker-solid:hover, .k-button-icon, .k-input-button {
-        background-color: #fff !important;
-    }
-
-    .k-calendar .k-calendar-td.k-selected .k-calendar-cell-inner, .k-calendar .k-calendar-td.k-selected .k-link,
-    .k-calendar .k-calendar-td.k-selected:hover .k-link {
-        background-color: #3e80ed;
-    }
-
-    .k-calendar .k-nav-today, .k-calendar .k-nav-today:hover, .k-calendar .k-calendar-view .k-today {
-        color: #3e80ed;
-    }
-
-    div.k-grid-footer, div.k-grid-header {
-        background: #3e80ed;
-    }
-
-    .box input, .childbox input {
-        width: 100px;
-        height: 35px;
-        margin-bottom: 15px;
-        margin-left: 70px;
-        text-align: center;
-        border-radius: 5px;
-    }
-
-    span#today {
-        float: right;
-        padding: 10px;
-        color: #3e80ed;
-        font-weight: bold;
-    }
-
-        span#today:before {
-            content: "Ngày: ";
-            color: black !important;
-        }
-
-    #parent {
-        display: flex;
-        justify-content: center;
-        background: #3e80ed;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px
-    }
-
-    span#title {
-        font-weight: bold;
-        font-size: 20px;
-        background: #3e80ed;
-        color: #fff;
-    }
+span#title {
+    font-weight: bold;
+    font-size: 20px;
+    background: #3e80ed;
+    color: #fff;
+}
 
 .inputgrid {
     padding: 7px;
     text-align: center;
     border-radius: 5px;
     border-color: #fff;
-
 }
+
 @media screen and (max-width: 820px) {
     .inputgrid {
         width: 50px
@@ -397,14 +404,41 @@ i {
         font-size: 12px;
     }
 
-    .k-window {
-        width: 100% !important;
-    }
     .box input, .childbox input {
         width: 50px;
         height: 35px;
         margin-left: 50px;
-       
     }
 
+    .content{
+        left: 45% !important
+    }
+}
+@media screen and (max-width: 390px) {
+    .inputgrid {
+        width: 50px
+    }
+
+    span#title {
+        font-size: 15px;
+    }
+
+    .k-column-title {
+        font-size: 10px;
+    }
+
+    h6.click {
+        font-size: 12px;
+    }
+
+    .box input, .childbox input {
+        width: 50px;
+        height: 35px;
+        margin-left: 50px;
+    }
+
+    .content {
+        position: relative !important;
+        left:0 !important
+    }
 }
