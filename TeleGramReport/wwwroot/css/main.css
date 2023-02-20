@@ -387,7 +387,7 @@ span#title {
     border-color: #fff;
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (min-width: 800px) {
     .inputgrid {
         width: 50px
     }
@@ -414,7 +414,7 @@ span#title {
         left: 45% !important
     }
 }
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 800px) {
     .inputgrid {
         width: 50px
     }
@@ -439,6 +439,35 @@ span#title {
 
     .content {
         position: relative !important;
-        left:0 !important
+        left: 0 !important
+    }
+}
+
+@media screen and (min-width: 1000px) {
+
+    .content {
+        left: 40% !important
+    }
+}
+@media screen and (min-width: 1200px) {
+
+
+    .content {
+        left: 30% !important
+    }
+}
+@media screen and (min-width: 1400px) {
+ 
+
+    .content {
+        left: 30% !important
+    }
+}
+
+@media screen and (min-width: 1600px) {
+
+
+    .content {
+        left: 20% !important
     }
 }
