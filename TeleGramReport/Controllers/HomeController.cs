@@ -255,14 +255,15 @@ namespace TeleGramReport.Controllers
 
 			return Json(re);
 		}
-		public async Task<JsonResult> GetCT1(double gr, string type, string Date)
+		public async Task<JsonResult> GetCT1(double gr, string type, string Date, int flag)
 		{
 
 			var re = await _dp.QueryAsync<dynamic>("telegram..NumbyType", commandType: System.Data.CommandType.StoredProcedure, new
 			{
 				Type = type,
 				GroupID = gr,
-				Date=Date
+				Date=Date,
+				flag = flag
 			});
 
 			return Json(re);

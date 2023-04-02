@@ -348,9 +348,10 @@ div.k-grid-footer, div.k-grid-header {
     width: 100px;
     height: 35px;
     margin-bottom: 15px;
-    margin-left: 70px;
+    border-color: #f7f9fb;
     text-align: center;
     border-radius: 5px;
+    margin-top: 15px;
 }
 
 span#today {
@@ -405,9 +406,9 @@ span#title {
     }
 
     .box input, .childbox input {
-        width: 50px;
+        width: 100px;
         height: 35px;
-        margin-left: 50px;
+       
     }
 
     .content{
@@ -434,7 +435,7 @@ span#title {
     .box input, .childbox input {
         width: 50px;
         height: 35px;
-        margin-left: 50px;
+      
     }
 
     .content {
@@ -470,4 +471,20 @@ span#title {
     .content {
         left: 20% !important
     }
+}
+
+table, th, td {
+    border: 1px solid #707172;
+    border-collapse: collapse;
+    text-align: center
+}
+#tbl100 > tbody > tr > td {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    border-color: #bbb;
+}
+#tbl100 {
+    border-collapse: inherit !important;
+    border-color: transparent;
 }

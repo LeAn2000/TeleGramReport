@@ -84,7 +84,7 @@ var Init = {
                 template: (dataItem) => {
                     return `<h6>${kendo.toString(dataItem.HH, "##,#")}</h6>`
                 },
-                footerTemplate: "#=sum#"
+                footerTemplate: "#=kendo.toString(sum, '0.00')#"
             }, {
                 field: "Amount",
                 title: "Trúng",
@@ -126,7 +126,7 @@ var Init = {
 
             }, {
                 field: "HH",
-                title: "Hoa Hồng", footerTemplate: "#=sum#"
+                title: "Hoa Hồng", footerTemplate: "#=kendo.toString(sum, '0.00')#"
             }, {
                 field: "Amount",
                 title: "Trúng",
@@ -140,7 +140,7 @@ var Init = {
                     if (dataItem.Earn > 0)
                         return `<h6 class='ok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
                     return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
-                }, footerTemplate: "#=sum#"
+                }, footerTemplate: "#=kendo.toString(sum, '0.00')#"
             },
             {
                 field: "CreatedDate",
@@ -272,7 +272,7 @@ var Init = {
                     flag = 4;
                 else
                     flag = 1;
-                $('#group').css("display", "inline-block" )
+                $('#group').css("display", "inline-block")
                 $('#location').css("display", "none")
             }
         });
@@ -401,7 +401,7 @@ var SetDataSource = {
                 elementgrid.data("kendoGrid").refresh();
                 $(".load").css("display", "inline");
                 $(".spinner-border").css("display", "none");
-             
+
             },
             error: function (err) {
                 console.log(err)
@@ -457,12 +457,34 @@ var SetDataSource = {
         $(".load").css("display", "inline");
         $(".spinner-border").css("display", "none");
         SetDataSource.ChangeTab($("#tabstrip"), tab)
-       
+
 
     },
-    ChangeTab: (element, tab) => { element.data("kendoTabStrip").select(tab)},
+    ChangeTab: (element, tab) => { element.data("kendoTabStrip").select(tab) },
+    CallAjaxforCustomGrid: (url, param, type, tab) => {
+        $(".reset").text(0)
+        $.ajax({
+            url: url,
+            data: param,
+            async: true,
+            type: type,
+            success: function (result) {
+                result.forEach(function (item) {
+                    id = "#value" + item.Num
+                    $(id).text(item.Value)
+                })
+            },
+            error: function (err) {
+                console.log(err)
+            },
+        })
+
+        SetDataSource.ChangeTab($("#tabstrip"), tab)
+    },
     Load: () => {
         $(".load").click(function () {
+            SetDataSource.ChangeTab($("#tabstrip"), 0)
+            $(".reset").text(0)
             $(".load").css("display", "none");
             $(".spinner-border").css("display", "inline-block");
             if (flag == 1)
@@ -471,17 +493,23 @@ var SetDataSource = {
                 SetDataSource.CallAjx("/Home/GiftReport", { location: "", Date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()) }, "GET", $('#gridsotrung'))
             else if (flag == 3)
                 SetDataSource.CallAjx("/Home/QuotaReport", { gr: $("#groupid").data('kendoDropDownList').value() }, "GET", $('#gridhanmuc'))
-            else if (flag == 4) { 
+            else if (flag == 4) {
                 SetDataSource.SetComlumsName($("#gridhoahong"), Init.InitColums.HH, 1)
                 SetDataSource.CallAjx("/Home/HHReport", { gr: $("#groupid").data('kendoDropDownList').value() }, "GET", $('#gridhoahong'))
             }
-               
+
         });
     },
 
     LoadDetail: {
         CT: (groupID, date) => { SetDataSource.CallAjxaggregate("/Home/GetCT", { gr: groupID, Date: date }, "GET", $('#griddetail'), 1, Init.InitColums.CT) },
-        CT1: (groupID, type, date) => { SetDataSource.CallAjxaggregate("/Home/GetCT1", { gr: groupID, type: type, date: date }, "GET", $('#griddetail1'), 2, Init.InitColums.CT1) }
+        CT1: (groupID, type, date) => {
+            if (!Helper.Checktype(type))
+                SetDataSource.CallAjxaggregate("/Home/GetCT1", { gr: groupID, type: type, date: date, flag: 1 }, "GET", $('#griddetail1'), 2, Init.InitColums.CT1)
+            else
+                SetDataSource.CallAjaxforCustomGrid("/Home/GetCT1", { gr: groupID, type: type, date: date, flag: 2 }, "GET",3)
+
+        }
     },
     FormatDate: (date) => {
         var d = new Date(date),
@@ -554,7 +582,7 @@ var SetDataSource = {
                 success: function (result) {
                     SetDataSource.ShowAlert(result);
                     $('.quota').find("input").val('')
-                    SetDataSource.ChangeTab($("#hanmuc"),1);
+                    SetDataSource.ChangeTab($("#hanmuc"), 1);
                     $(".load").trigger('click');
                 },
                 error: function (err) {
@@ -599,5 +627,12 @@ var SetDataSource = {
 
     }
 
-}
 
+
+}
+var Helper = {
+    Checktype: (type) => {
+        nottype = ["b4", "b5", "lo"]
+        return nottype.some(x => x == type)
+    }
+}

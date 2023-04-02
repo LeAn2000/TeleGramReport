@@ -61,6 +61,7 @@
                         <li class="k-active">Tổng hợp</li>
                         <li>Chi tiết</li>
                         <li>Chi tiết 1</li>
+                        <li>Chi tiết 2</li>
                     </ul>
                     <div>
                         <div id="parent"><span id="title">Báo cáo</span></div>
@@ -69,64 +70,154 @@
 
                     <div><div id="griddetail"></div></div>
                     <div><div id="griddetail1"></div></div>
+                    <div>
+                        <table id="tbl100" style="width:100%">
+                            @{
+                                string variable = "value";
+                                for (int j = 0; j < 10; j++)
+                                {
+                                    <tr>
+                                        @{
+                                            for (int i = 0; i < 10 ; i++)
+                                            {
+                                                <td>
+                                                    <div style="display:grid">
+                                                        <span style="font-size: 15px;font-weight: 800;" id="@j@i">@j@i</span>
+                                                        <span class="reset" style="font-size: 13px;color: blue;" id="@variable@i@j">0</span>
+                                                    </div>
+                                                   
+                                                   
+                                                </td>
+
+                                            }
+                                        }
+                                    </tr>
+
+                                }
+                            }
+
+                        </table>
+                    </div>
                 </div>
                 <div>
                     <div id="sotrung">
                         <ul>
-                            <li >Cập nhật</li>
-                            <li class="k-active" >Danh sách</li>
+                            <li>Cập nhật</li>
+                            <li class="k-active">Danh sách</li>
                         </ul>
                         <div>
                             <div class="gift">
-                                <div style="display:flex; justify-content:center">
+                                <div @*style="display:flex; justify-content:center"*@>
                                     <form id="form" method="post" action="/Home/InsertGift">
-                                        <span id="today"></span>
-                                        <div class="box"><input class="finput" min="0" name="num1" type="number" placeholder="đề" /></div>
+                                        <div style="display: inline-block;width: 100%;">
+                                            <button style="width: fit-content;" type="submit" class="form-control btn btn-primary rounded submit px-3">Cập nhật</button>
+                                            <span id="today"></span>
+                                        </div>
+
+                                        @* <div class="box"><input class="finput" min="0" name="num1" type="number" placeholder="đề" /></div>
                                         <div class="childbox">
-                                            <input name="num2" min="0" type="number" placeholder="số" />
-                                            <input name="num3" min="0" type="number" placeholder="số" />
-                                            <input name="num4" min="0" type="number" placeholder="số" />
+                                        <input name="num2" min="0" type="number" placeholder="số" />
+                                        <input name="num3" min="0" type="number" placeholder="số" />
+                                        <input name="num4" min="0" type="number" placeholder="số" />
                                         </div>
                                         <div class="childbox">
-                                            <input name="num5" min="0" type="number" placeholder="số" class="finput" />
-                                            <input name="num6" min="0" type="number" placeholder="số" />
-                                            <input name="num7" min="0" type="number" placeholder="số" />
+                                        <input name="num5" min="0" type="number" placeholder="số" class="finput" />
+                                        <input name="num6" min="0" type="number" placeholder="số" />
+                                        <input name="num7" min="0" type="number" placeholder="số" />
                                         </div>
                                         <div class="childbox">
-                                            <input name="num8" min="0" type="number" placeholder="số" class="finput" />
-                                            <input name="num9" min="0" type="number" placeholder="số" />
-                                            <input name="num10" min="0" type="number" placeholder="số" />
+                                        <input name="num8" min="0" type="number" placeholder="số" class="finput" />
+                                        <input name="num9" min="0" type="number" placeholder="số" />
+                                        <input name="num10" min="0" type="number" placeholder="số" />
                                         </div>
                                         <div class="childbox">
-                                            <input name="num11" min="0" type="number" placeholder="số" class="finput" />
-                                            <input name="num12" min="0" type="number" placeholder="số" />
-                                            <input name="num13" min="0" type="number" placeholder="số" />
+                                        <input name="num11" min="0" type="number" placeholder="số" class="finput" />
+                                        <input name="num12" min="0" type="number" placeholder="số" />
+                                        <input name="num13" min="0" type="number" placeholder="số" />
                                         </div>
                                         <div class="childbox">
-                                            <input name="num14" min="0" type="number" placeholder="số" class="finput" />
-                                            <input name="num15" min="0" type="number" placeholder="số" />
-                                            <input name="num16" min="0" type="number" placeholder="số" />
+                                        <input name="num14" min="0" type="number" placeholder="số" class="finput" />
+                                        <input name="num15" min="0" type="number" placeholder="số" />
+                                        <input name="num16" min="0" type="number" placeholder="số" />
                                         </div>
                                         <div class="childbox">
-                                            <input name="num17" min="0" type="number" placeholder="số" class="finput" />
-                                            <input name="num18" min="0" type="number" placeholder="số" />
-                                            <input name="num19" min="0" type="number" placeholder="số" />
+                                        <input name="num17" min="0" type="number" placeholder="số" class="finput" />
+                                        <input name="num18" min="0" type="number" placeholder="số" />
+                                        <input name="num19" min="0" type="number" placeholder="số" />
                                         </div>
                                         <div class="childbox">
-                                            <input name="num20" min="0" type="number" placeholder="số" class="finput" />
-                                            <input name="num21" min="0" type="number" placeholder="số" />
-                                            <input name="num22" min="0" type="number" placeholder="số" />
+                                        <input name="num20" min="0" type="number" placeholder="số" class="finput" />
+                                        <input name="num21" min="0" type="number" placeholder="số" />
+                                        <input name="num22" min="0" type="number" placeholder="số" />
                                         </div>
                                         <div class="childbox">
-                                            <input name="num23" min="0" type="number" placeholder="số" class="finput" />
-                                            <input name="num24" min="0" type="number" placeholder="số" />
-                                            <input name="num25" min="0" type="number" placeholder="số" />
+                                        <input name="num23" min="0" type="number" placeholder="số" class="finput" />
+                                        <input name="num24" min="0" type="number" placeholder="số" />
+                                        <input name="num25" min="0" type="number" placeholder="số" />
                                         </div>
                                         <div class="childbox">
-                                            <input name="num26" min="0" type="number" placeholder="số" class="finput" />
-                                            <input name="num27" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <button type="submit" class="form-control btn btn-primary rounded submit px-3">Cập nhật</button>
+                                        <input name="num26" min="0" type="number" placeholder="số" class="finput" />
+                                        <input name="num27" min="0" type="number" placeholder="số" />
+                                        </div>*@
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+                                                <td> <div class="box"><input class="finput" min="0" name="num1" type="number" placeholder="đề" /></div></td>
+                                                <td></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="childbox"> <input name="num2" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num3" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num4" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="childbox"> <input name="num5" min="0" type="number" placeholder="số" class="finput" /></td>
+                                                <td class="childbox"> <input name="num6" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num7" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="childbox"> <input name="num8" min="0" type="number" placeholder="số" class="finput" /></td>
+                                                <td class="childbox"> <input name="num9" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num10" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="childbox"> <input name="num11" min="0" type="number" placeholder="số" class="finput" /></td>
+                                                <td class="childbox"> <input name="num12" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num13" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="childbox"> <input name="num14" min="0" type="number" placeholder="số" class="finput" /></td>
+                                                <td class="childbox"> <input name="num15" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num16" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="childbox"> <input name="num17" min="0" type="number" placeholder="số" class="finput" /></td>
+                                                <td class="childbox"> <input name="num18" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num19" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="childbox"> <input name="num20" min="0" type="number" placeholder="số" class="finput" /></td>
+                                                <td class="childbox"> <input name="num21" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num22" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="childbox"> <input name="num23" min="0" type="number" placeholder="số" class="finput" /></td>
+                                                <td class="childbox"> <input name="num24" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num25" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="childbox"> <input name="num26" min="0" type="number" placeholder="số" /></td>
+                                                <td class="childbox"> <input name="num27" min="0" type="number" placeholder="số" /></td>
+                                            </tr>
+                                        </table>
+
+
                                     </form>
                                 </div>
                             </div>
@@ -137,7 +228,7 @@
                 <div>
                     <div id="hanmuc">
                         <ul>
-                            <li >Cập nhật</li>
+                            <li>Cập nhật</li>
                             <li class="k-active">Danh sách</li>
                         </ul>
                         <div>
@@ -164,7 +255,7 @@
                                 </div>
                             </div>
                         </div>
-                       <div id="gridhanmuc"></div>
+                        <div id="gridhanmuc"></div>
                     </div>
                 </div>
 
