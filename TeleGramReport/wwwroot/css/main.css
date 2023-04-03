@@ -488,3 +488,7 @@ table, th, td {
     border-collapse: inherit !important;
     border-color: transparent;
 }
+.take {
+    background: #096cc159 !important;
+    border-radius: 21px;
+}

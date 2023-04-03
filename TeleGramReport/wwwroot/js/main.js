@@ -462,6 +462,7 @@ var SetDataSource = {
     },
     ChangeTab: (element, tab) => { element.data("kendoTabStrip").select(tab) },
     CallAjaxforCustomGrid: (url, param, type, tab) => {
+        
         $(".reset").text(0)
         $.ajax({
             url: url,
@@ -471,7 +472,13 @@ var SetDataSource = {
             success: function (result) {
                 result.forEach(function (item) {
                     id = "#value" + item.Num
+                   
                     $(id).text(item.Value)
+                    if (item.ck == 1) {
+                        div = $(id).closest('div');
+                        div.addClass('take')
+                    }
+                        
                 })
             },
             error: function (err) {
@@ -484,6 +491,7 @@ var SetDataSource = {
     Load: () => {
         $(".load").click(function () {
             SetDataSource.ChangeTab($("#tabstrip"), 0)
+            $("#tbl100").find('.take').removeClass("take");
             $(".reset").text(0)
             $(".load").css("display", "none");
             $(".spinner-border").css("display", "inline-block");
