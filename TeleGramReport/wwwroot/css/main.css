@@ -284,11 +284,11 @@ span.noneck {
 }
 
 .ok {
-    color: #fa3131;
+    color: #19ad0e;
 }
 
 .notok {
-    color: #19ad0e;
+    color: #fa3131;
 }
 
 .k-input-value-text {
@@ -411,8 +411,9 @@ span#title {
        
     }
 
-    .content{
-        left: 45% !important
+    .content {
+        position: relative !important;
+        left: 0 !important;
     }
 }
 @media screen and (max-width: 800px) {
@@ -447,14 +448,16 @@ span#title {
 @media screen and (min-width: 1000px) {
 
     .content {
-        left: 40% !important
+        position: relative !important;
+        left: 0 !important
     }
 }
 @media screen and (min-width: 1200px) {
 
 
     .content {
-        left: 30% !important
+        position: absolute !important;
+        left: 37% !important
     }
 }
 @media screen and (min-width: 1400px) {
@@ -469,7 +472,8 @@ span#title {
 
 
     .content {
-        left: 20% !important
+        position: absolute !important;
+        left: 23% !important
     }
 }
 
@@ -491,4 +495,25 @@ table, th, td {
 .take {
     background: #096cc159 !important;
     border-radius: 21px;
+}
+span#today1 {
+    float: right;
+    font-weight: 600;
+}
+
+span#groupname {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.triangle {
+    position: absolute;
+    margin-left: 5px;
+    border: 1px solid;
+    width: 23px;
+    border-radius: 10px;
+    background: #0cd74a;
+    color: #fff;
+    height: 20px;
+    font-weight: 800;
 }

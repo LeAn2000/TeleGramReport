@@ -228,13 +228,13 @@ var Init = {
             resizable: false,
             reorderable: true,
             height: "700px",
+            pageSize: 100,
             pageable: {
                 refresh: true,
                 buttonCount: 5,
-                pageSize: 100,
                 messages: {
                     itemsPerPage: "dòng / trang",
-                    display: "Hiển thị {0} - {1} / {2}",
+                    display: "Tổng {2}",
                     empty: "Không tìm thấy dữ liệu",
                 },
             },
@@ -270,8 +270,15 @@ var Init = {
                     flag = 3;
                 else if (item == "hoa hồng")
                     flag = 4;
+                else if (item == "tổng") {
+                    flag = 5
+                    $('#kieuchoii').css("display", "inline-block")
+                    return;
+                }
+
                 else
                     flag = 1;
+                $('#kieuchoii').css("display", "none")
                 $('#group').css("display", "inline-block")
                 $('#location').css("display", "none")
             }
@@ -368,6 +375,18 @@ var Init = {
 
         });
 
+        $("#kieuchoi").kendoDropDownList({
+            dataValueField: "ID",
+            dataTextField: "Name",
+            dataSource: [
+                { ID: "d9", Name: "Đề 9" },
+                { ID: "d8", Name: "Đề 8" },
+                { ID: "lo", Name: "Lô" },
+            ],
+            select: 0
+        });
+
+
         var date = new Date();
         $("#date").kendoDatePicker({
             format: "dd/MM/yyyy",
@@ -461,9 +480,11 @@ var SetDataSource = {
 
     },
     ChangeTab: (element, tab) => { element.data("kendoTabStrip").select(tab) },
-    CallAjaxforCustomGrid: (url, param, type, tab) => {
-        
+    CallAjaxforCustomGrid: (url, param, type) => {
+
         $(".reset").text(0)
+        $(".reset_num").text("")
+        
         $.ajax({
             url: url,
             data: param,
@@ -472,26 +493,31 @@ var SetDataSource = {
             success: function (result) {
                 result.forEach(function (item) {
                     id = "#value" + item.Num
-                   
+                    ids = "#s" + item.Num
                     $(id).text(item.Value)
                     if (item.ck == 1) {
                         div = $(id).closest('div');
                         div.addClass('take')
                     }
-                        
+                    if (item.s > 0) {
+                        $(ids).text(item.s)
+                        $(ids).addClass('triangle')
+                    }
+
                 })
             },
             error: function (err) {
                 console.log(err)
             },
         })
-
-        SetDataSource.ChangeTab($("#tabstrip"), tab)
+        $(".load").css("display", "inline");
+        $(".spinner-border").css("display", "none");
     },
     Load: () => {
         $(".load").click(function () {
             SetDataSource.ChangeTab($("#tabstrip"), 0)
             $("#tbl100").find('.take').removeClass("take");
+            $("#tbl100").find('.triangle').removeClass("triangle");
             $(".reset").text(0)
             $(".load").css("display", "none");
             $(".spinner-border").css("display", "inline-block");
@@ -505,6 +531,13 @@ var SetDataSource = {
                 SetDataSource.SetComlumsName($("#gridhoahong"), Init.InitColums.HH, 1)
                 SetDataSource.CallAjx("/Home/HHReport", { gr: $("#groupid").data('kendoDropDownList').value() }, "GET", $('#gridhoahong'))
             }
+            else if (flag == 5) {
+                SetDataSource.CallAjaxforCustomGrid("/Home/GetCT1", { gr: $("#groupid").data('kendoDropDownList').value(), type: $("#kieuchoi").data('kendoDropDownList').value(), date: SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()), flag: 2 }, "GET")
+                $("#groupname").text("Nhóm: "+$("#groupid").data('kendoDropDownList').text())
+                $("#today1").text("Ngày: " +SetDataSource.FormatDate($("#date").data("kendoDatePicker").value(),true))
+
+            }
+            
 
         });
     },
@@ -512,14 +545,13 @@ var SetDataSource = {
     LoadDetail: {
         CT: (groupID, date) => { SetDataSource.CallAjxaggregate("/Home/GetCT", { gr: groupID, Date: date }, "GET", $('#griddetail'), 1, Init.InitColums.CT) },
         CT1: (groupID, type, date) => {
-            if (!Helper.Checktype(type))
-                SetDataSource.CallAjxaggregate("/Home/GetCT1", { gr: groupID, type: type, date: date, flag: 1 }, "GET", $('#griddetail1'), 2, Init.InitColums.CT1)
-            else
-                SetDataSource.CallAjaxforCustomGrid("/Home/GetCT1", { gr: groupID, type: type, date: date, flag: 2 }, "GET",3)
+
+            SetDataSource.CallAjxaggregate("/Home/GetCT1", { gr: groupID, type: type, date: date, flag: 1 }, "GET", $('#griddetail1'), 2, Init.InitColums.CT1)
+
 
         }
     },
-    FormatDate: (date) => {
+    FormatDate: (date,key) => {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -529,7 +561,8 @@ var SetDataSource = {
             month = '0' + month;
         if (day.length < 2)
             day = '0' + day;
-
+        if (key)
+            return [day, month, year].join('-');
         return [year, month, day].join('-');
     },
     ShowAlert: (json) => {

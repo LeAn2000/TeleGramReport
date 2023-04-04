@@ -37,10 +37,15 @@
                 <input id="loc" type="text" class="inputfield" />
                 <label for="name" class="inputlabel">Location</label>
             </div>
+            <div class="input-gr" id="kieuchoii" style="display:none">
+                <input id="kieuchoi" class="inputfield" />
+                <label for="name" class="inputlabel">Kiểu chơi</label>
+            </div>
             <div class="input-gr" id="datee">
                 <input id="date" class="inputfield" />
                 <label for="name" class="inputlabel">Ngày</label>
             </div>
+
             <div style="display:inline-block">
                 <a href="#" class="load"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
                 <div class="spinner-border" role="status">
@@ -55,13 +60,13 @@
                     <li>Số trúng</li>
                     <li>Hạn mức</li>
                     <li>Hoa hồng</li>
+                    <li>Tổng</li>
                 </ul>
                 <div id="tabstrip">
                     <ul>
                         <li class="k-active">Tổng hợp</li>
                         <li>Chi tiết</li>
                         <li>Chi tiết 1</li>
-                        <li>Chi tiết 2</li>
                     </ul>
                     <div>
                         <div id="parent"><span id="title">Báo cáo</span></div>
@@ -70,34 +75,7 @@
 
                     <div><div id="griddetail"></div></div>
                     <div><div id="griddetail1"></div></div>
-                    <div>
-                        <table id="tbl100" style="width:100%">
-                            @{
-                                string variable = "value";
-                                for (int j = 0; j < 10; j++)
-                                {
-                                    <tr>
-                                        @{
-                                            for (int i = 0; i < 10 ; i++)
-                                            {
-                                                <td>
-                                                    <div style="display:grid">
-                                                        <span style="font-size: 15px;font-weight: 800; background: transparent;" id="@j@i">@j@i</span>
-                                                        <span class="reset" style="font-size: 13px;color: blue;background: transparent;" id="@variable@j@i">0</span>
-                                                    </div>
-                                                   
-                                                   
-                                                </td>
 
-                                            }
-                                        }
-                                    </tr>
-
-                                }
-                            }
-
-                        </table>
-                    </div>
                 </div>
                 <div>
                     <div id="sotrung">
@@ -260,7 +238,41 @@
                 </div>
 
                 <div><div id="gridhoahong"></div></div>
+                <div>
+                    <div style="display: inline-block;width: 100%; padding:10px">
+                        <span id="groupname"></span>
+                        <span id="today1"></span>
+                    </div>
+                    <table id="tbl100" style="width:100%">
 
+                        @{
+                            string variable = "value";
+                            string s = "s";
+                            for (int j = 0; j < 10; j++)
+                            {
+                                <tr>
+                                    @{
+                                        for (int i = 0; i < 10; i++)
+                                        {
+                                            <td>
+                                                <div style="display:grid">
+                                                    <div style="display: inline-flex"><span class="reset_num" id="@s@j@i"></span></div>
+                                                    <span style="font-size: 15px;font-weight: 800; background: transparent;" id="@j@i">@j@i</span>
+                                                    <span class="reset" style="font-size: 13px;color: blue;background: transparent;" id="@variable@j@i">0</span>
+                                                </div>
+
+
+                                            </td>
+
+                                        }
+                                    }
+                                </tr>
+
+                            }
+                        }
+
+                    </table>
+                </div>
             </div>
 
         </section>
