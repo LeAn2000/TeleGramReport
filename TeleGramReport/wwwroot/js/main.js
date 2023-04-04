@@ -15,7 +15,7 @@
     });
     $('#today').text(SetDataSource.FormatDate($("#date").data("kendoDatePicker").value()))
 
-
+    SetDataSource.ChangeTab($("#parenttab"), 4)
 });
 
 
