@@ -358,7 +358,7 @@ var Init = {
                 { ID: "d8", Name: "Đề 8" },
                 { ID: "lo", Name: "Lô" },
                 { ID: "b4", Name: "Lô 4" },
-                { ID: "b5", Name: "Lô 5" }
+                { ID: "b5", Name: "Lô 5" },
             ],
             select: 0
         });
