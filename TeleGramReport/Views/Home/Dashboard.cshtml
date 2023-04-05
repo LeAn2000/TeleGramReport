@@ -13,6 +13,7 @@
           crossorigin="anonymous" />
     <link rel="stylesheet"
           href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.default-main.min.css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.1028/styles/kendo.mobile.all.min.css" />
     <link href="~/css/main.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
 
@@ -37,7 +38,7 @@
                 <input id="loc" type="text" class="inputfield" />
                 <label for="name" class="inputlabel">Location</label>
             </div>
-            <div class="input-gr" id="kieuchoii" style="display:none">
+            <div class="input-gr" id="kieuchoii">
                 <input id="kieuchoi" class="inputfield" />
                 <label for="name" class="inputlabel">Kiểu chơi</label>
             </div>
@@ -287,4 +288,5 @@
     </div>
 </script>
 
-<script src="~/js/main.js"></script>
+
+<script src="~/js/main.js?v=@DateTime.UtcNow.ToLongTimeString()"></script>
