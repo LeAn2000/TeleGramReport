@@ -88,9 +88,15 @@ var Init = {
                 field: "Amount",
                 title: "Trúng",
                 template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.Amount, "##,#")}</h6>`
+                    if (dataItem.Amount > 0)
+                        return `<h6 class='ok'>${kendo.toString(dataItem.Amount, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(dataItem.Amount, "##,#")}</h6>`;
                 },
-                footerTemplate: "#=sum#"
+                footerTemplate: (d) => {
+                    if (d.Earn.Amount > 0)
+                        return `<h6 class='ok'>${kendo.toString(d.Amount.sum, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(d.Amount.sum, "##,#")}</h6>`;
+                }
 
             }, {
                 field: "Earn",
@@ -100,7 +106,11 @@ var Init = {
                         return `<h6 class='ok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
                     return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
                 },
-                footerTemplate: "#=sum#"
+                footerTemplate: (d) => {
+                    if (d.Earn.sum > 0)
+                        return `<h6 class='ok'>${kendo.toString(d.Earn.sum, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(d.Earn.sum, "##,#")}</h6>`;
+                }
             },
             {
                 field: "CreatedDate",
@@ -130,8 +140,15 @@ var Init = {
                 field: "Amount",
                 title: "Trúng",
                 template: (dataItem) => {
-                    return `<h6>${kendo.toString(dataItem.Amount, "##,#")}</h6>`
-                }, footerTemplate: "#=sum#"
+                    if (dataItem.Amount > 0)
+                        return `<h6 class='ok'>${kendo.toString(dataItem.Amount, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(dataItem.Amount, "##,#")}</h6>`;
+                },
+                footerTemplate: (d) => {
+                    if (d.Earn.Amount > 0)
+                        return `<h6 class='ok'>${kendo.toString(d.Amount.sum, "##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(d.Amount.sum, "##,#")}</h6>`;
+                }
             }, {
                 field: "Earn",
                 title: "Thắng/Thua",
@@ -139,7 +156,11 @@ var Init = {
                     if (dataItem.Earn > 0)
                         return `<h6 class='ok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
                     return `<h6 class='notok'>${kendo.toString(dataItem.Earn, "##,#")}</h6>`;
-                }, footerTemplate: "#=kendo.toString(sum, '0.00')#"
+                }, footerTemplate: (d) => {
+                    if (d.Earn.sum > 0)
+                        return `<h6 class='ok'>${kendo.toString(d.Earn.sum,"##,#")}</h6>`;
+                    return `<h6 class='notok'>${kendo.toString(d.Earn.sum, "##,#")}</h6>`;
+                }//"#=kendo.toString(sum, '0.00')#"
             },
             {
                 field: "CreatedDate",
@@ -225,8 +246,7 @@ var Init = {
         element.kendoGrid({
             sortable: true,
             resizable: false,
-            reorderable: true,
-            height: "700px",
+            reorderable: true, 
             pageSize: 100,
             pageable: {
                 refresh: true,
