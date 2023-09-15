@@ -51,6 +51,13 @@ namespace TeleGramReport.Controllers
 
 		}
 
+
+		public IActionResult DashBoard()
+		{
+			return View();
+		}
+
+
 		[HttpPost]
 		public async Task<IActionResult> Login(string username, string password)
 		{
@@ -228,10 +235,6 @@ namespace TeleGramReport.Controllers
 			});
 		}
 	
-		public IActionResult Dashboard()
-		{
-			return View();
-		}
 
 		public async Task<JsonResult> GetTH(double gr, string date)
 		{
