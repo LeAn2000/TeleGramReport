@@ -56,6 +56,22 @@ namespace TeleGramReport.Controllers
 		{
 			return View();
 		}
+		public IActionResult Commission()
+		{
+			return View();
+		}
+		public IActionResult Limit()
+		{
+			return View();
+		}
+		public IActionResult Number()
+		{
+			return View();
+		}
+		public IActionResult Sum()
+		{
+			return View();
+		}
 
 
 		[HttpPost]

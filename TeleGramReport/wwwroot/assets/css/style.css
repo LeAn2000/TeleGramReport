@@ -106,7 +106,7 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @-webkit-keyframes flash {
   0% {
     opacity: 1; }
@@ -10548,35 +10548,6 @@ input:focus {
   border-color: transparent;
   outline: none; }
 
-/* Fonts */
-@font-face {
-  font-family: "Rubik";
-  src: url("../fonts/rubik/Rubik-Light.eot");
-  src: url("../fonts/rubik/Rubik-Light.woff2") format("woff2"), url("../fonts/rubik/Rubik-Light.woff") format("woff"), url("../fonts/rubik/Rubik-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal; }
-
-@font-face {
-  font-family: "Rubik";
-  src: url("../fonts/rubik/Rubik-Regular.eot");
-  src: url("../fonts/rubik/Rubik-Regular.woff2") format("woff2"), url("../fonts/rubik/Rubik-Regular.woff") format("woff"), url("../fonts/rubik/Rubik-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal; }
-
-@font-face {
-  font-family: "Rubik";
-  src: url("../fonts/rubik/Rubik-Medium.eot");
-  src: url("../fonts/rubik/Rubik-Medium.woff2") format("woff2"), url("../fonts/rubik/Rubik-Medium.woff") format("woff"), url("../fonts/rubik/Rubik-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal; }
-
-@font-face {
-  font-family: "Rubik";
-  src: url("../fonts/rubik/Rubik-Bold.eot");
-  src: url("../fonts/rubik/Rubik-Bold.woff2") format("woff2"), url("../fonts/rubik/Rubik-Bold.woff") format("woff"), url("../fonts/rubik/Rubik-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal; }
-
 /* Backgrounds  */
 /* inverse varient */
 .bg-inverse-icon-primary {
@@ -10766,14 +10737,14 @@ input:focus {
 /* Typography */
 body {
   font-size: 1rem;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: normal;
   -webkit-font-smoothing: antialiased; }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: medium; }
 
 p {
@@ -10915,7 +10886,7 @@ pre {
 code {
   padding: 5px;
   color: #ff3ca6;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
   font-size: 0.875rem;
   border-radius: 4px; }
@@ -10951,7 +10922,7 @@ code {
   -webkit-transition: all 0.25s ease;
   -ms-transition: all 0.25s ease;
   font-size: calc(0.875rem - 0.05rem);
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400; }
   .footer a {
     color: #00cccd;
@@ -11053,11 +11024,11 @@ code {
   flex-grow: 1; }
 
 .font-weight-light {
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 300; }
 
 .font-weight-medium {
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 500; }
 
 /* Demo Styles */
@@ -11284,7 +11255,7 @@ code {
   font-weight: medium;
   line-height: 1;
   padding: 5px 7px;
-  font-family: "Rubik", sans-serif; }
+  font-family: "Roboto", sans-serif; }
   .badge.badge-pill {
     border-radius: 10rem; }
 
@@ -11566,7 +11537,7 @@ code {
 .btn, .fc button, .ajax-upload-dragdrop .ajax-file-upload {
   font-size: 0.875rem;
   line-height: 1.71;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   /* Buttons with only icons */
   /* Buttons with icon and text */ }
@@ -12109,16 +12080,16 @@ code {
     color: #343a40;
     margin-bottom: .75rem;
     text-transform: capitalize;
-    font-family: "Rubik", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 16px; }
   .card .card-subtitle {
-    font-family: "Rubik", sans-serif;
+    font-family: "Roboto", sans-serif;
     margin-top: 0.625rem;
     margin-bottom: 0.625rem; }
   .card .card-description {
     color: #76838f;
     margin-bottom: 1.5rem;
-    font-family: "Rubik", sans-serif; }
+    font-family: "Roboto", sans-serif; }
   .card.card-outline-success {
     border: 1px solid #00cccd; }
   .card.card-outline-primary {
@@ -12356,7 +12327,7 @@ code {
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   border: 1px solid #ebedf2;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 0.8125rem;
   height: auto;
@@ -12483,7 +12454,7 @@ select.tt-hint {
     -ms-flex-align: center;
     align-items: center;
     padding: 15px 15px;
-    font-family: "Rubik", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 0.875rem; }
     .icons-list > div i {
@@ -13300,7 +13271,7 @@ select.tt-hint {
     .table thead th {
       border-top: 0;
       border-bottom-width: 1px;
-      font-family: "Rubik", sans-serif;
+      font-family: "Roboto", sans-serif;
       font-weight: 500;
       padding-left: 25px; }
       .rtl .table thead th {
@@ -13368,7 +13339,7 @@ select.tt-hint {
     background: transparent;
     border-color: rgba(255, 255, 255, 0.2);
     color: #071495;
-    font-family: "Rubik", sans-serif;
+    font-family: "Roboto", sans-serif;
     padding: 1.75rem; }
     .nav-tabs.nav-tabs-vertical-custom .nav-link.active {
       color: #ffffff;
@@ -13549,7 +13520,7 @@ select.tt-hint {
   left: 50%;
   z-index: 1000;
   font-size: 0.875rem;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: initial;
   line-height: 1.85;
   border-radius: 10px;
@@ -13557,7 +13528,7 @@ select.tt-hint {
   transform: scale(0.8); }
   .avgrund-popin p {
     font-size: 0.875rem;
-    font-family: "Rubik", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: initial; }
 
 .avgrund-overlay {
@@ -13628,7 +13599,7 @@ body.avgrund-active {
 /* CodeMirror */
 .CodeMirror {
   font-size: 0.875rem;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   height: auto;
   text-align: left;
@@ -13694,7 +13665,7 @@ body.avgrund-active {
           right: 31px; }
         .datepicker.datepicker-dropdown .datepicker-days table.table-condensed thead tr th.dow,
         .datepicker.datepicker-inline .datepicker-days table.table-condensed thead tr th.dow {
-          font-family: "Rubik", sans-serif;
+          font-family: "Roboto", sans-serif;
           color: #434a54;
           font-size: .875rem; }
           .datepicker.datepicker-dropdown .datepicker-days table.table-condensed thead tr th.dow:first-child,
@@ -13916,7 +13887,7 @@ body.avgrund-active {
           border-radius: 0;
           color: #ffffff;
           padding: 2rem 1rem;
-          font-family: "Rubik", sans-serif; }
+          font-family: "Roboto", sans-serif; }
           @media (max-width: 991px) {
             .datepicker-custom .datepicker.datepicker-inline .datepicker-days .table-condensed thead tr th.next, .datepicker-custom .datepicker.datepicker-inline .datepicker-days .table-condensed thead tr th.prev, .datepicker-custom .datepicker.datepicker-inline .datepicker-days .table-condensed thead tr th.datepicker-switch, .datepicker-custom .datepicker.datepicker-inline .datepicker-days .table-condensed thead tr th.dow,
             .datepicker-custom .datepicker.datepicker-inline .datepicker-months .table-condensed thead tr th.next,
@@ -14058,7 +14029,7 @@ body.avgrund-active {
   height: auto;
   background-image: none;
   text-shadow: none;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   background-color: #ffffff;
   border-color: #ebedf2;
@@ -14437,7 +14408,7 @@ dl {
   .settings-panel .settings-heading {
     padding: 16px 0 13px 35px;
     font-size: 0.875rem;
-    font-family: "Rubik", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: bold;
     line-height: 1;
     color: rgba(0, 0, 0, 0.9);
@@ -14584,42 +14555,48 @@ dl {
 
 /* Navbar */
 .navbar {
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   left: 260px;
   transition: left 0.25s ease, width 0.25s ease;
   -webkit-transition: left 0.25s ease, width 0.25s ease;
   -moz-transition: left 0.25s ease, width 0.25s ease;
   -ms-transition: left 0.25s ease, width 0.25s ease; }
-  .navbar .navbar-menu-wrapper {
-    transition: width 0.25s ease;
-    -webkit-transition: width 0.25s ease;
-    -moz-transition: width 0.25s ease;
-    -ms-transition: width 0.25s ease;
-    color: #8e94a9;
-    padding-left: 15px;
-    padding-right: 15px;
-    width: calc(100% - 260px);
-    height: 70px;
-    background: #000; }
+    .navbar .navbar-menu-wrapper {
+        transition: width 0.25s ease;
+        -webkit-transition: width 0.25s ease;
+        -moz-transition: width 0.25s ease;
+        -ms-transition: width 0.25s ease;
+        color: #8e94a9;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: calc(100% - 260px);
+        height: 70px;
+        background: #18875a;
+    }
     @media (max-width: 991px) {
       .navbar .navbar-menu-wrapper {
         width: 100%;
         padding-left: 11px; } }
-    .navbar .navbar-menu-wrapper .navbar-toggler {
-      border: 0;
-      color: #8e94a9; }
+.navbar .navbar-menu-wrapper .navbar-toggler {
+    border: 0;
+    color: #000000;
+}
       @media (max-width: 991px) {
         .navbar .navbar-menu-wrapper .navbar-toggler:not(.navbar-toggler-right) {
-          display: none; } }
+          display: none;
+          color:#fff
+        } }
       .navbar .navbar-menu-wrapper .navbar-toggler i {
-        font-size: 1rem; }
+        font-size: 1rem;
+      }
         .navbar .navbar-menu-wrapper .navbar-toggler i:before {
-          width: 34px;
-          height: 34px;
-          border-radius: 50px;
-          background: #3f3f40;
-          text-align: center;
-          line-height: 2.2; }
+            width: 34px;
+            height: 34px;
+            border-radius: 50px;
+            background: #ffffff;
+            text-align: center;
+            line-height: 2.2;
+        }
     .navbar .navbar-menu-wrapper .navbar-text {
       font-size: 0.875rem; }
     .navbar .navbar-menu-wrapper .navbar-nav {
@@ -14644,12 +14621,14 @@ dl {
           .navbar .navbar-menu-wrapper .navbar-nav .nav-item {
             padding-right: 0.5rem;
             padding-left: 0.5rem; } }
-        .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link {
-          color: #8e94a9;
-          font-size: 0.875rem; }
-          .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link i {
-            font-size: 17px;
-            color: #8e94a9; }
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link {
+    color: #ffffff;
+    font-size: 0.875rem;
+}
+    .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link i {
+        font-size: 17px;
+        color: #ffffff;
+    }
           .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link .nav-profile-img {
             height: 34px;
             width: 34px;
@@ -14861,11 +14840,12 @@ dl {
       padding: 0; } }
   @media (max-width: 768px) {
     .navbar {
-      padding-left: 25px;
-      padding-right: 13px;
-      background: #000;
-      padding-bottom: 0;
-      padding-top: 0; } }
+        padding-left: 25px;
+        padding-right: 13px;
+        background: #18875a;
+        padding-bottom: 0;
+        padding-top: 0;
+    } }
 
 @media (max-width: 991px) {
   .navbar {
@@ -14884,12 +14864,13 @@ dl {
 /* Sidebar */
 .sidebar {
     min-height: calc(100vh - 70px);
-    background: -webkit-gradient(linear, left top, left bottom, from(#e6e5f2), to(#4599cd));
-    background: linear-gradient(to bottom, #e6e5f2, #4599cd);
-    font-family: "Rubik", sans-serif;
+    /*background: -webkit-gradient(linear, left top, left bottom, from(#e6e5f2), to(#4599cd));
+    background: linear-gradient(to bottom, #e6e5f2, #4599cd);*/
+    background: #f5f5f5;
+    font-family: "Roboto", sans-serif;
     padding: 0;
     width: 260px;
-    z-index: 11;
+    box-shadow: -1px 11px 30px 3px #aaaaaa; z-index: 11;
     transition: width 0.25s ease, background 0.25s ease;
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
@@ -14935,6 +14916,7 @@ dl {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        font-weight:500;
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
@@ -14949,7 +14931,7 @@ dl {
             font-size: 20px;
             line-height: 1;
             margin-right: 10px;
-            color: #423a8e; }
+            color: #000000; }
             .rtl .sidebar .nav .nav-item .nav-link i.menu-icon {
               margin-left: 10px;
               margin-right: 0; }
@@ -14977,7 +14959,7 @@ dl {
         .sidebar .nav .nav-item .nav-link .menu-title {
           color: #141212;
           display: inline-block;
-          font-size: 15px;
+          font-size: 13px;
           line-height: 1;
           vertical-align: middle; }
           .rtl .sidebar .nav .nav-item .nav-link .menu-title {
@@ -14988,16 +14970,16 @@ dl {
         .sidebar .nav .nav-item .nav-link[aria-expanded="true"] .menu-arrow:before {
           content: "\F374"; }
         .sidebar .nav .nav-item .nav-link:hover {
-          font-weight: 500;
-          -webkit-transition-duration: 0.45s;
-          transition-duration: 0.45s; }
+          font-weight: 300;
+          -webkit-transition-duration: 0.15s;
+          transition-duration: 0.15s; }
       .sidebar .nav .nav-item.active {
         background: inherit; }
         .sidebar .nav .nav-item.active > .nav-link {
           font-weight: 500; }
           .sidebar .nav .nav-item.active > .nav-link .menu-title {
             color: inherit;
-            font-family: "Rubik", sans-serif;
+            font-family: "Roboto", sans-serif;
             font-weight: 500; }
       .sidebar .nav .nav-item.nav-profile .nav-link {
         height: auto;
@@ -15124,22 +15106,34 @@ dl {
 
 /* style for off-canvas menu*/
 @media screen and (max-width: 991px) {
-  .sidebar-offcanvas {
-    position: fixed;
-    max-height: calc(100vh - 70px);
-    top: 70px;
-    bottom: 0;
-    overflow: auto;
-    right: -260px;
-    -webkit-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out; }
-    .sidebar-offcanvas.active {
-      right: 0; }
-  .sidebar-brand-wrapper {
-    width: 75px; }
-    .sidebar-brand-wrapper .brand-logo-mini {
-      display: inline-block; } }
+    .sidebar-offcanvas {
+        position: fixed;
+        max-height: calc(100vh - 70px);
+        top: 70px;
+        bottom: 0;
+        overflow: auto;
+        right: -260px;
+        -webkit-transition: all 0.25s ease-out;
+        transition: all 0.25s ease-out;
+    }
 
+        .sidebar-offcanvas.active {
+            right: 0;
+        }
+
+    .sidebar-brand-wrapper {
+        width: 75px;
+    }
+
+        .sidebar-brand-wrapper .brand-logo-mini {
+            display: inline-block;
+        }
+
+    .navbar .navbar-menu-wrapper .navbar-toggler {
+        border: 0;
+        color: #fff;
+    }
+}
 /* Layouts */
 .navbar.fixed-top + .page-body-wrapper {
   padding-top: 70px; }
