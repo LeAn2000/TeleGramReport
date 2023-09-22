@@ -3991,7 +3991,7 @@ textarea.is-invalid.tt-hint {
       display: inline-block; }
     .form-inline .input-group,
     .form-inline .custom-select {
-      width: auto; }
+      width: 200px; }
     .form-inline .form-check {
       display: -webkit-box;
       display: -ms-flexbox;
