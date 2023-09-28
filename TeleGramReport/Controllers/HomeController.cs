@@ -35,7 +35,9 @@ namespace TeleGramReport.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			//Adduser(new LoginModel("tony", "12345"));
+			//Remove("token");
+
+   //         Adduser(new LoginModel("Tony", "123@Tony"));
 			var token = Get("token");
 			if (string.IsNullOrEmpty(token))
 				return View();
@@ -43,9 +45,7 @@ namespace TeleGramReport.Controllers
 			var res = await CheckToken(token);
 			if (res > 0)
 			{
-
 				return RedirectToAction("Dashboard");
-
 			}
 			return View();
 
@@ -56,7 +56,11 @@ namespace TeleGramReport.Controllers
 		{
 			return View();
 		}
-		public IActionResult Commission()
+        public IActionResult Report()
+        {
+            return View();
+        }
+        public IActionResult Commission()
 		{
 			return View();
 		}
@@ -316,7 +320,7 @@ namespace TeleGramReport.Controllers
 			if (expireTime.HasValue)
 				option.Expires = DateTime.Now.AddHours(expireTime.Value);
 			else
-				option.Expires = DateTime.Now.AddHours(12);
+				option.Expires = DateTime.Now.AddHours(5);
 			Response.Cookies.Append(key, value, option);
 		}
 
@@ -328,7 +332,7 @@ namespace TeleGramReport.Controllers
 		public void Adduser(LoginModel a)
 		{
 			var pass = Ultis.Encrypt(a.password);
-			var result = _dp.QueryAsync<dynamic>("telegram..AddUser", commandType: System.Data.CommandType.StoredProcedure, new
+			var result = _dp.QueryAsync<dynamic>("PowerTelegram..Adduser", commandType: System.Data.CommandType.StoredProcedure, new
 			{
 				username = a.username,
 				password = pass
@@ -338,7 +342,7 @@ namespace TeleGramReport.Controllers
 		public async Task<int> LoginAccess(LoginModel a)
 		{
 			var pass = Ultis.Encrypt(a.password);
-			var result = await _dp.FirstOrDefaultAsync<int>("telegram..LoginAcc", new
+			var result = await _dp.FirstOrDefaultAsync<int>("PowerTelegram..LoginAcc", new
 			{
 				username = a.username,
 				password = pass
@@ -349,7 +353,7 @@ namespace TeleGramReport.Controllers
 		public void Addsession(MytokenModel a)
 		{
 
-			var result = _dp.QueryAsync<dynamic>("telegram..LoginSession", commandType: System.Data.CommandType.StoredProcedure, new
+			var result = _dp.QueryAsync<dynamic>("PowerTelegram..Addsession", commandType: System.Data.CommandType.StoredProcedure, new
 			{
 				username = a.username,
 				token = a.token,
@@ -359,7 +363,7 @@ namespace TeleGramReport.Controllers
 		public async Task<int> CheckToken(string token)
 		{
 
-			var result = await _dp.FirstOrDefaultAsync<int>("telegram..CheckToken", new
+			var result = await _dp.FirstOrDefaultAsync<int>("PowerTelegram..CheckToken", new
 			{
 				token = token
 			}, commandType: System.Data.CommandType.StoredProcedure);
