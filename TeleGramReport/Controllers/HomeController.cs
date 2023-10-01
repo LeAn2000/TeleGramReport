@@ -16,87 +16,92 @@ using TeleGramReport.Services;
 
 namespace TeleGramReport.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly ILogger<HomeController> _logger;
-		private readonly DapperContext _dp;
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+        private readonly DapperContext _dp;
 
 
-		public HomeController(ILogger<HomeController> logger, DapperContext dp)
-		{
-			_logger = logger;
-			_dp = dp;
+        public HomeController(ILogger<HomeController> logger, DapperContext dp)
+        {
+            _logger = logger;
+            _dp = dp;
 
-		}
+        }
 
-		public async Task<IActionResult> Index()
-		{
-			//Remove("token");
+        public async Task<IActionResult> Index()
+        {
+            //Remove("token");
 
-   //         Adduser(new LoginModel("Tony", "123@Tony"));
-			var token = Get("token");
-			if (string.IsNullOrEmpty(token))
-				return View();
+            //         Adduser(new LoginModel("Tony", "123@Tony"));
+            var token = Get("token");
+            if (string.IsNullOrEmpty(token))
+                return View();
 
-			var res = await CheckToken(token);
-			if (res > 0)
-			{
-				return RedirectToAction("Dashboard");
-			}
-			return View();
+            var res = await CheckToken(token);
+            if (res > 0)
+            {
+                return RedirectToAction("Dashboard");
+            }
+            return View();
 
-		}
+        }
 
 
-		public async Task<IActionResult> DashBoard()
-		{
-            var result = await _dp.QueryAsync<DashBoardModel>("PowerTelegram..Global_Tracking", commandType: System.Data.CommandType.StoredProcedure);
-            ViewBag.user = Get("username");
-            return View(result);
-		}
+        public async Task<IActionResult> DashBoard()
+        {
+            var user = Get("username");
+            if (user != null || user != "")
+            {
+                var result = await _dp.QueryAsync<DashBoardModel>("PowerTelegram..Global_Tracking", commandType: System.Data.CommandType.StoredProcedure);
+                ViewBag.user = user;
+                return View(result);
+            }
+            return RedirectToAction("Index");
+        }
         public IActionResult Report()
         {
             return View();
         }
         public IActionResult Commission()
-		{
-			return View();
-		}
-		public IActionResult Limit()
-		{
-			return View();
-		}
-		public IActionResult Number()
-		{
-			return View();
-		}
-		public IActionResult Sum()
-		{
-			return View();
-		}
+        {
+            return View();
+        }
+        public IActionResult Limit()
+        {
+            return View();
+        }
+        public IActionResult Number()
+        {
+            return View();
+        }
+        public IActionResult Sum()
+        {
+            return View();
+        }
 
 
-		[HttpPost]
-		public async Task<IActionResult> Login(string username, string password)
-		{
+        [HttpPost]
+        public async Task<IActionResult> Login(string username, string password)
+        {
 
-			var acc = new LoginModel(username, password);
-			var check = await LoginAccess(acc);
-			if (check > 0)
-			{
-				var token = Ultis.GenerateToken();
-				var session = new MytokenModel(username, token, DateTime.Now.AddHours(5));
-				Addsession(session);
-				Set("username", username, null);
-				Set("token", token, null);
-				ViewBag.logfail = "";
-                
-				return RedirectToAction("Dashboard");
-			}
-			ViewBag.logfail = "* Tài khoản hoặc mặt khẩu chưa đúng";
-			return View("Index");
+            var acc = new LoginModel(username, password);
+            var check = await LoginAccess(acc);
+            if (check > 0)
+            {
+                var token = Ultis.GenerateToken();
+                var session = new MytokenModel(username, token, DateTime.Now.AddHours(5));
+                Addsession(session);
+                Set("username", username, null);
+                Set("token", token, null);
+                ViewBag.logfail = "";
 
-		}
+                return RedirectToAction("Dashboard");
+            }
+            ViewBag.logfail = "* Tài khoản hoặc mặt khẩu chưa đúng";
+            return View("Index");
+
+        }
 
         //[HttpPost]
         //public async Task<JsonResult> InsertGift(string num1,
@@ -364,85 +369,85 @@ namespace TeleGramReport.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-				return Json(ex);
+                return Json(ex);
             }
 
         }
 
         public async Task<JsonResult> GiftReport(string location, string Date)
-		{
-			var re = await _dp.QueryAsync<dynamic>("telegram..GiftReport", commandType: System.Data.CommandType.StoredProcedure, new
-			{
-				location = location,
-				Date = Date
-			}); ;
+        {
+            var re = await _dp.QueryAsync<dynamic>("telegram..GiftReport", commandType: System.Data.CommandType.StoredProcedure, new
+            {
+                location = location,
+                Date = Date
+            }); ;
 
-			return Json(re);
-		}
+            return Json(re);
+        }
 
-		public string Get(string key)
-		{
-			return Request.Cookies[key];
-		}
+        public string Get(string key)
+        {
+            return Request.Cookies[key];
+        }
 
-		public void Set(string key, string value, int? expireTime)
-		{
-			CookieOptions option = new CookieOptions();
-			if (expireTime.HasValue)
-				option.Expires = DateTime.Now.AddHours(expireTime.Value);
-			else
-				option.Expires = DateTime.Now.AddHours(5);
-			Response.Cookies.Append(key, value, option);
-		}
+        public void Set(string key, string value, int? expireTime)
+        {
+            CookieOptions option = new CookieOptions();
+            if (expireTime.HasValue)
+                option.Expires = DateTime.Now.AddHours(expireTime.Value);
+            else
+                option.Expires = DateTime.Now.AddHours(5);
+            Response.Cookies.Append(key, value, option);
+        }
 
-		public void Remove(string key)
-		{
-			Response.Cookies.Delete(key);
-		}
+        public void Remove(string key)
+        {
+            Response.Cookies.Delete(key);
+        }
 
-		public void Adduser(LoginModel a)
-		{
-			var pass = Ultis.Encrypt(a.password);
-			var result = _dp.QueryAsync<dynamic>("PowerTelegram..Adduser", commandType: System.Data.CommandType.StoredProcedure, new
-			{
-				username = a.username,
-				password = pass
-			});
-		}
+        public void Adduser(LoginModel a)
+        {
+            var pass = Ultis.Encrypt(a.password);
+            var result = _dp.QueryAsync<dynamic>("PowerTelegram..Adduser", commandType: System.Data.CommandType.StoredProcedure, new
+            {
+                username = a.username,
+                password = pass
+            });
+        }
 
-		public async Task<int> LoginAccess(LoginModel a)
-		{
-			var pass = Ultis.Encrypt(a.password);
-			var result = await _dp.FirstOrDefaultAsync<int>("PowerTelegram..LoginAcc", new
-			{
-				username = a.username,
-				password = pass
-			}, commandType: System.Data.CommandType.StoredProcedure);
-			return result;
-		}
+        public async Task<int> LoginAccess(LoginModel a)
+        {
+            var pass = Ultis.Encrypt(a.password);
+            var result = await _dp.FirstOrDefaultAsync<int>("PowerTelegram..LoginAcc", new
+            {
+                username = a.username,
+                password = pass
+            }, commandType: System.Data.CommandType.StoredProcedure);
+            return result;
+        }
 
-		public void Addsession(MytokenModel a)
-		{
+        public void Addsession(MytokenModel a)
+        {
 
-			var result = _dp.QueryAsync<dynamic>("PowerTelegram..Addsession", commandType: System.Data.CommandType.StoredProcedure, new
-			{
-				username = a.username,
-				token = a.token,
-				expiredtime = a.expiredtime
-			});
-		}
-		public async Task<int> CheckToken(string token)
-		{
+            var result = _dp.QueryAsync<dynamic>("PowerTelegram..Addsession", commandType: System.Data.CommandType.StoredProcedure, new
+            {
+                username = a.username,
+                token = a.token,
+                expiredtime = a.expiredtime
+            });
+        }
+        public async Task<int> CheckToken(string token)
+        {
 
-			var result = await _dp.FirstOrDefaultAsync<int>("PowerTelegram..CheckToken", new
-			{
-				token = token
-			}, commandType: System.Data.CommandType.StoredProcedure);
-			return result;
-		}
+            var result = await _dp.FirstOrDefaultAsync<int>("PowerTelegram..CheckToken", new
+            {
+                token = token
+            }, commandType: System.Data.CommandType.StoredProcedure);
+            return result;
+        }
 
 
-        
+
 
     }
 }
