@@ -1,0 +1,11 @@
+﻿h6.click {
+    font-size: 14px;
+    cursor: pointer;
+}
+.ok {
+    color: #19ad0e;
+}
+
+.notok {
+    color: #fa3131;
+}

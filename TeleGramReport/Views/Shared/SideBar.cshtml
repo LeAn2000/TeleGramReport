@@ -1,0 +1,54 @@
+﻿<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
+        @*<a class="sidebar-brand brand-logo" href="index.html"><img style="height:85px;width:100px" src="~/assets/images/logo.png" alt="logo" /></a>*@
+        <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.html"><img style=" height: 25px; width: 25px; margin-bottom: 10px" src="~/assets/images/logo-mini.png" alt="logo" /></a>
+    </div>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("DashBoard","Home")">
+                <i class="mdi mdi-home menu-icon"></i>
+                <span class="menu-title">TỔNG QUAN</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Report","Home")">
+                <i class="mdi mdi-cash menu-icon"></i>
+                <span class="menu-title">BÁO CÁO</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Number","Home")">
+                <i class="mdi mdi-cash-100 menu-icon"></i>
+                <span class="menu-title">SỐ TRÚNG</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Sum","Home")">
+                <i class="mdi mdi-cash-multiple menu-icon"></i>
+                <span class="menu-title">TỔNG</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Commission","Home")">
+                <i class="mdi mdi-cash-usd menu-icon"></i>
+                <span class="menu-title">HOA HỒNG</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Limit","Home")">
+                <i class="mdi  mdi-apple-keyboard-caps menu-icon"></i>
+                <span class="menu-title">HẠN MỨC</span>
+            </a>
+        </li>
+       
+        <li class="nav-item sidebar-actions">
+            <div class="nav-link">
+                <div class="mt-4">
+                    <ul class="mt-4 pl-0">
+                        <li style="position:absolute;width:100%;bottom:6rem"><i class="mdi mdi-logout menu-icon"></i>Đăng xuất</li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>

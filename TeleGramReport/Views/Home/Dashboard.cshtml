@@ -1,292 +1,185 @@
-﻿@using TeleGramReport.Models;
+﻿@using System.Globalization;
+@using TeleGramReport.Models;
+@model List<DashBoardModel>
+@{
+    ViewData["Title"] = "DashBoard";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<div class="content-wrapper pb-0">
+    <div class="row">
+        <div class="col-xl-3 col-lg-12 stretch-card grid-margin">
+            <div class="row">
+                @{
+                    CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+                   
+                    int count = 0;
+                    string[] colors = { "card bg-warning", "card bg-warning", "card bg-primary", "card bg-primary" };
+                    string[] icons = { "mdi mdi-cube-outline bg-inverse-icon-warning", "mdi mdi-cube-outline bg-inverse-icon-warning", "mdi mdi-briefcase-outline bg-inverse-icon-primary", "mdi mdi-briefcase-outline bg-inverse-icon-primary" };
+                    foreach(var item in Model)
+                    {
+                        <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                            <div class="@colors[count]">
+                                <div class="card-body px-3 py-4">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="color-card">
+                                            <h3 class="mb-1 text-white">@item.Location</h3>
+                                            <h4 class="mb-1 text-white">
+                                                @{
+                                                    string b = "0";
+                                                    if (item.Value > 0)
+                                                    {
+                                                        b = item.Value.ToString("#,###", cul.NumberFormat);
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>DashBoard</title>
-    <link rel="icon" type="image/x-icon" href="~/icon/bitcoin.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous" />
-    <link rel="stylesheet"
-          href="https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.default-main.min.css" />
-    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.1028/styles/kendo.mobile.all.min.css" />
-    <link href="~/css/main.css" rel="stylesheet" />
-    <link href="~/css/style.css" rel="stylesheet" />
+                                                    }
+                                                }
+                                                Điểm: @b
+                                               
+                                            </h4>
+                                            <h4 class="mb-1 text-white">
+                                                @{
+                                                    string a = "0";
+                                                    if (item.EARN > 0)
+                                                    {
+                                                        a = item.EARN.ToString("#,###", cul.NumberFormat);
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2022.2.802/js/kendo.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                    }
+                                                }
+                                                Thắng/thua: @a
+                                               
+                                            </h4>
+                                           
+                                           
+                                        </div>
+                                        <i class="card-icon-indicator @icons[count]"></i>
+                                    </div>
+                                    <h6 class="text-white">Ngày: @DateTime.Parse(item.Date).ToString("dd/MM/yyyy")</h6>
+                                </div>
+                            </div>
+                        </div>
 
-</head>
-<body>
-    <div class="contain">
-        <div class="content">
-            <div class="input-gr" id="group">
-                <input id="groupid" type="text" class="inputfield" />
-                <label for="name" class="inputlabel">Nhóm</label>
+                        count++;            
+                    }
+                }
+               
+              @*  <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                    <div class="card bg-danger">
+                        <div class="card-body px-3 py-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="color-card">
+                                    <p class="mb-0 color-card-head">@Model[0].Location</p>
+                                    <h2 class="text-white">
+                                        $5,300.<span class="h5">00</span>
+                                    </h2>
+                                </div>
+                                <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
+                            </div>
+                            <h6 class="text-white">13.21% Since last month</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
+                    <div class="card bg-primary">
+                        <div class="card-body px-3 py-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="color-card">
+                                    <p class="mb-0 color-card-head">Orders</p>
+                                    <h2 class="text-white">
+                                        $1,753.<span class="h5">00</span>
+                                    </h2>
+                                </div>
+                                <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
+                            </div>
+                            <h6 class="text-white">67.98% Since last month</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-6 stretch-card pb-sm-3 pb-lg-0">
+                    <div class="card bg-success">
+                        <div class="card-body px-3 py-4">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="color-card">
+                                    <p class="mb-0 color-card-head">Affiliate</p>
+                                    <h2 class="text-white">2368</h2>
+                                </div>
+                                <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"></i>
+                            </div>
+                            <h6 class="text-white">20.32% Since last month</h6>
+                        </div>
+                    </div>
+                </div>*@
             </div>
-            <div class="input-gr" id="location" style="display:none">
-                <input id="loc" type="text" class="inputfield" />
-                <label for="name" class="inputlabel">Location</label>
-            </div>
-            <div class="input-gr" id="kieuchoii">
-                <input id="kieuchoi" class="inputfield" />
-                <label for="name" class="inputlabel">Kiểu chơi</label>
-            </div>
-            <div class="input-gr" id="datee">
-                <input id="date" class="inputfield" />
-                <label for="name" class="inputlabel">Ngày</label>
-            </div>
-
-            <div style="display:inline-block">
-                <a href="#" class="load"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
+        </div>
+        <div class="col-xl-9 stretch-card grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="card mb-3 mb-sm-0">
+                                <div class="card-body py-3 px-4">
+                                    <p class="m-0 survey-head">Today Earnings</p>
+                                    <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                                        <div>
+                                            <h3 class="m-0 survey-value">$5,300</h3>
+                                            <p class="text-success m-0">-310 avg. sales</p>
+                                        </div>
+                                        <div id="earningChart" class="flot-chart" style="padding: 0px;"><canvas class="flot-base" width="64" height="51" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 64px; height: 51px;"></canvas><canvas class="flot-overlay" width="64" height="51" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 64px; height: 51px;"></canvas></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card mb-3 mb-sm-0">
+                                <div class="card-body py-3 px-4">
+                                    <p class="m-0 survey-head">Product Sold</p>
+                                    <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                                        <div>
+                                            <h3 class="m-0 survey-value">$9,100</h3>
+                                            <p class="text-danger m-0">-310 avg. sales</p>
+                                        </div>
+                                        <div id="productChart" class="flot-chart" style="padding: 0px;"><canvas class="flot-base" width="64" height="51" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 64px; height: 51px;"></canvas><canvas class="flot-overlay" width="64" height="51" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 64px; height: 51px;"></canvas></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body py-3 px-4">
+                                    <p class="m-0 survey-head">Today Orders</p>
+                                    <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                                        <div>
+                                            <h3 class="m-0 survey-value">$4,354</h3>
+                                            <p class="text-success m-0">-310 avg. sales</p>
+                                        </div>
+                                        <div id="orderChart" class="flot-chart" style="padding: 0px;"><canvas class="flot-base" width="64" height="51" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 64px; height: 51px;"></canvas><canvas class="flot-overlay" width="64" height="51" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 64px; height: 51px;"></canvas></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-sm-12">
+                            <div class="flot-chart-wrapper">
+                                <div id="flotChart" class="flot-chart" style="padding: 0px;">
+                                    <canvas class="flot-base" width="1162" height="276" style="width: 1162.75px; height: 276px;"></canvas>
+                                    <canvas class="flot-overlay" width="1162" height="276" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 1162.75px; height: 276px;"></canvas><div class="flot-svg" style="position: absolute; top: 0px; left: 0px; height: 100%; width: 100%; pointer-events: none;"><svg style="width: 100%; height: 100%;"><g class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; inset: 0px;"><text x="0.4609375" y="271.25" class="flot-tick-label tickLabel" style="position: absolute; text-align: center;">2000</text><text x="995.3027096518987" y="271.25" class="flot-tick-label tickLabel" style="position: absolute; text-align: center;">5500</text><text x="142.58119066455697" y="271.25" class="flot-tick-label tickLabel" style="position: absolute; text-align: center;">2500</text><text x="284.70144382911394" y="271.25" class="flot-tick-label tickLabel" style="position: absolute; text-align: center;">3000</text><text x="426.82169699367086" y="271.25" class="flot-tick-label tickLabel" style="position: absolute; text-align: center;">3500</text><text x="568.9419501582279" y="271.25" class="flot-tick-label tickLabel" style="position: absolute; text-align: center;">4000</text><text x="711.0622033227849" y="271.25" class="flot-tick-label tickLabel" style="position: absolute; text-align: center;">4500</text><text x="853.1824564873417" y="271.25" class="flot-tick-label tickLabel" style="position: absolute; text-align: center;">5000</text></g></svg></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <p class="text-muted mb-0">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. <b>Learn More</b>
+                            </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="mb-0 text-muted">Sales Revenue</p>
+                            <h5 class="d-inline-block survey-value mb-0"> $2,45,500 </h5>
+                            <p class="d-inline-block text-danger mb-0"> last 8 months </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <section class="tab">
-            <div id="parenttab">
-                <ul>
-                    <li class="k-active">Báo cáo</li>
-                    <li>Số trúng</li>
-                    <li>Hạn mức</li>
-                    <li>Hoa hồng</li>
-                    <li>Tổng</li>
-                </ul>
-                <div id="tabstrip">
-                    <ul>
-                        <li class="k-active">Tổng hợp</li>
-                        <li>Chi tiết</li>
-                        <li>Chi tiết 1</li>
-                    </ul>
-                    <div>
-                        <div id="parent"><span id="title">Báo cáo</span></div>
-                        <div id="grid"></div>
-                    </div>
-
-                    <div><div id="griddetail"></div></div>
-                    <div><div id="griddetail1"></div></div>
-
-                </div>
-                <div>
-                    <div id="sotrung">
-                        <ul>
-                            <li>Cập nhật</li>
-                            <li class="k-active">Danh sách</li>
-                        </ul>
-                        <div>
-                            <div class="gift">
-                                <div @*style="display:flex; justify-content:center"*@>
-                                    <form id="form" method="post" action="/Home/InsertGift">
-                                        <div style="display: inline-block;width: 100%;">
-                                            <button style="width: fit-content;" type="submit" class="form-control btn btn-primary rounded submit px-3">Cập nhật</button>
-                                            <span id="today"></span>
-                                        </div>
-
-                                        @* <div class="box"><input class="finput" min="0" name="num1" type="number" placeholder="đề" /></div>
-                                        <div class="childbox">
-                                        <input name="num2" min="0" type="number" placeholder="số" />
-                                        <input name="num3" min="0" type="number" placeholder="số" />
-                                        <input name="num4" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <div class="childbox">
-                                        <input name="num5" min="0" type="number" placeholder="số" class="finput" />
-                                        <input name="num6" min="0" type="number" placeholder="số" />
-                                        <input name="num7" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <div class="childbox">
-                                        <input name="num8" min="0" type="number" placeholder="số" class="finput" />
-                                        <input name="num9" min="0" type="number" placeholder="số" />
-                                        <input name="num10" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <div class="childbox">
-                                        <input name="num11" min="0" type="number" placeholder="số" class="finput" />
-                                        <input name="num12" min="0" type="number" placeholder="số" />
-                                        <input name="num13" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <div class="childbox">
-                                        <input name="num14" min="0" type="number" placeholder="số" class="finput" />
-                                        <input name="num15" min="0" type="number" placeholder="số" />
-                                        <input name="num16" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <div class="childbox">
-                                        <input name="num17" min="0" type="number" placeholder="số" class="finput" />
-                                        <input name="num18" min="0" type="number" placeholder="số" />
-                                        <input name="num19" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <div class="childbox">
-                                        <input name="num20" min="0" type="number" placeholder="số" class="finput" />
-                                        <input name="num21" min="0" type="number" placeholder="số" />
-                                        <input name="num22" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <div class="childbox">
-                                        <input name="num23" min="0" type="number" placeholder="số" class="finput" />
-                                        <input name="num24" min="0" type="number" placeholder="số" />
-                                        <input name="num25" min="0" type="number" placeholder="số" />
-                                        </div>
-                                        <div class="childbox">
-                                        <input name="num26" min="0" type="number" placeholder="số" class="finput" />
-                                        <input name="num27" min="0" type="number" placeholder="số" />
-                                        </div>*@
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td> <div class="box"><input class="finput" min="0" name="num1" type="number" placeholder="đề" /></div></td>
-                                                <td></td>
-                                                <td></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="childbox"> <input name="num2" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num3" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num4" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="childbox"> <input name="num5" min="0" type="number" placeholder="số" class="finput" /></td>
-                                                <td class="childbox"> <input name="num6" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num7" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="childbox"> <input name="num8" min="0" type="number" placeholder="số" class="finput" /></td>
-                                                <td class="childbox"> <input name="num9" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num10" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="childbox"> <input name="num11" min="0" type="number" placeholder="số" class="finput" /></td>
-                                                <td class="childbox"> <input name="num12" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num13" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="childbox"> <input name="num14" min="0" type="number" placeholder="số" class="finput" /></td>
-                                                <td class="childbox"> <input name="num15" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num16" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="childbox"> <input name="num17" min="0" type="number" placeholder="số" class="finput" /></td>
-                                                <td class="childbox"> <input name="num18" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num19" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="childbox"> <input name="num20" min="0" type="number" placeholder="số" class="finput" /></td>
-                                                <td class="childbox"> <input name="num21" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num22" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="childbox"> <input name="num23" min="0" type="number" placeholder="số" class="finput" /></td>
-                                                <td class="childbox"> <input name="num24" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num25" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td class="childbox"> <input name="num26" min="0" type="number" placeholder="số" /></td>
-                                                <td class="childbox"> <input name="num27" min="0" type="number" placeholder="số" /></td>
-                                            </tr>
-                                        </table>
-
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div><div id="gridsotrung"></div></div>
-                    </div>
-                </div>
-                <div>
-                    <div id="hanmuc">
-                        <ul>
-                            <li>Cập nhật</li>
-                            <li class="k-active">Danh sách</li>
-                        </ul>
-                        <div>
-                            <div class="quota">
-                                @*<div class="input-gr">
-                                <input id="groupid1" type="text" class="inputfield" />
-                                <label for="name" class="inputlabel">Nhóm</label>
-                                </div>*@
-                                <div style="display:flex; justify-content:center">
-                                    <div>
-                                        <div class="childbox">
-                                            <input id="d8" min="0" type="number" placeholder="d8" class="finput" />
-                                            <input id="d9" min="0" type="number" placeholder="d9" />
-                                            <input id="lo" min="0" type="number" placeholder="lo" />
-                                        </div>
-                                        <div class="childbox">
-                                            <input id="x2" min="0" type="number" placeholder="x2" class="finput" />
-                                            <input id="x3" min="0" type="number" placeholder="x3" />
-                                            <input id="x4" min="0" type="number" placeholder="x4" />
-                                        </div>
-                                        <button type="submit" id="update" class="form-control btn btn-primary rounded submit px-3">Cập nhật</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div id="gridhanmuc"></div>
-                    </div>
-                </div>
-
-                <div><div id="gridhoahong"></div></div>
-                <div>
-                    <div style="display: inline-block;width: 100%; padding:10px">
-                        <span id="groupname"></span>
-                        <span id="today1"></span>
-                    </div>
-                    <table id="tbl100" style="width:100%">
-
-                        @{
-                            string variable = "value";
-                            string s = "s";
-                            for (int j = 0; j < 10; j++)
-                            {
-                                <tr>
-                                    @{
-                                        for (int i = 0; i < 10; i++)
-                                        {
-                                            <td>
-                                                <div style="display:grid">
-                                                    <div style="display: inline-flex"><span class="reset_num" id="@s@j@i"></span></div>
-                                                    <span style="font-size: 15px;font-weight: 800; background: transparent;" id="@j@i">@j@i</span>
-                                                    <span class="reset" style="font-size: 13px;color: blue;background: transparent;" id="@variable@j@i">0</span>
-                                                </div>
-
-
-                                            </td>
-
-                                        }
-                                    }
-                                </tr>
-
-                            }
-                        }
-
-                    </table>
-                </div>
-            </div>
-
-        </section>
-
-
     </div>
-</body>
-</html>
-<script id="headersave" type="text/x-kendo-template">
-    <div  style='text-align:right;background:rgb(62,128,237);'>
-      <button id='confirm' onclick='SetDataSource.Update()'><i class="fa fa-plus" aria-hidden="true"></i>Cập nhật</button>
-    </div>
-</script>
-
-
-<script src="~/js/main.js?v=@DateTime.UtcNow.ToLongTimeString()"></script>
+</div>

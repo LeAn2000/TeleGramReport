@@ -26,7 +26,7 @@ namespace TeleGramReport
             services.AddControllersWithViews();
             services.AddSession();
             services.AddSingleton(option => {
-                string _sR = "Server=103.155.216.114,1533;Database=telegram;User ID=dev;Password=XpVry8CukD@QzwTg;Connection Timeout=3600;TrustServerCertificate=True";
+                string _sR = "Server=103.155.216.114;Database=PowerTelegram;User ID=dev;Password=XpVry8CukD@QzwTg;Connection Timeout=3600;TrustServerCertificate=True";
                 return new DapperContext(_sR);
             });
             
