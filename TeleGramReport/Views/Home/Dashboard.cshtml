@@ -11,101 +11,111 @@
             <div class="row">
                 @{
                     CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
-                   
+
                     int count = 0;
-                    string[] colors = { "card bg-warning", "card bg-warning", "card bg-primary", "card bg-primary" };
-                    string[] icons = { "mdi mdi-cube-outline bg-inverse-icon-warning", "mdi mdi-cube-outline bg-inverse-icon-warning", "mdi mdi-briefcase-outline bg-inverse-icon-primary", "mdi mdi-briefcase-outline bg-inverse-icon-primary" };
-                    foreach(var item in Model)
+                    string[] icons = { "mdi mdi-chart-bar", "mdi mdi-chart-areaspline", "mdi mdi-chart-histogram", "mdi mdi-chart-pie" };
+                    foreach (var item in Model)
                     {
                         <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
-                            <div class="@colors[count]">
+                            <div class="card">
                                 <div class="card-body px-3 py-4">
                                     <div class="d-flex justify-content-between align-items-start">
                                         <div class="color-card">
-                                            <h3 class="mb-1 text-white">@item.Location</h3>
-                                            <h4 class="mb-1 text-white">
+                                            <h3 class="mb-1 survey-head">@item.Location</h3>
+                                            <h4 class="mb-1 survey-value">
                                                 @{
                                                     string b = "0";
+                                                    string colorclass = "text-danger";
                                                     if (item.Value > 0)
                                                     {
-                                                        b = item.Value.ToString("#,###", cul.NumberFormat);
-
+                                                        b = "+" + item.Value.ToString("#,###", cul.NumberFormat);
+                                                        colorclass = "text-success";
+                                                    }
+                                                    else if (item.Value < 0)
+                                                    {
+                                                        b = "-" + item.Value.ToString("#,###", cul.NumberFormat);
                                                     }
                                                 }
-                                                Điểm: @b
-                                               
+                                                Điểm:<span class="ml-1 @colorclass">@b</span>
+
                                             </h4>
-                                            <h4 class="mb-1 text-white">
+                                            <h4 class="mb-1 text-dard">
                                                 @{
                                                     string a = "0";
+                                                    string color1class = "text-danger";
                                                     if (item.EARN > 0)
                                                     {
-                                                        a = item.EARN.ToString("#,###", cul.NumberFormat);
+                                                        a = "+" + item.EARN.ToString("#,###", cul.NumberFormat);
+                                                        color1class = "text-success";
 
                                                     }
+                                                    else if (item.EARN < 0)
+                                                    {
+                                                        a = "-" + item.EARN.ToString("#,###", cul.NumberFormat);
+                                                    }
                                                 }
-                                                Thắng/thua: @a
-                                               
+                                                Thắng/thua: <span class="ml-1 @color1class">@a</span>
+
                                             </h4>
-                                           
-                                           
+
+
                                         </div>
-                                        <i class="card-icon-indicator @icons[count]"></i>
+                                        <i class="card-icon-indicator @icons[count] bg-inverse-icon-primary"></i>
                                     </div>
-                                    <h6 class="text-white">Ngày: @item.Date.ToString("dd/MM/yyyy")</h6>
+                                    <h6 class="text-dark">Ngày: @item.Date.ToString("dd/MM/yyyy")</h6>
                                 </div>
                             </div>
                         </div>
 
-                        count++;            
+                        count++;
                     }
                 }
-               
-              @*  <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
-                    <div class="card bg-danger">
-                        <div class="card-body px-3 py-4">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div class="color-card">
-                                    <p class="mb-0 color-card-head">@Model[0].Location</p>
-                                    <h2 class="text-white">
-                                        $5,300.<span class="h5">00</span>
-                                    </h2>
-                                </div>
-                                <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
-                            </div>
-                            <h6 class="text-white">13.21% Since last month</h6>
-                        </div>
-                    </div>
+
+                @*  <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                <div class="card bg-danger">
+                <div class="card-body px-3 py-4">
+                <div class="d-flex justify-content-between align-items-start">
+                <div class="color-card">
+                <p class="mb-0 color-card-head">@Model[0].Location</p>
+                <h2 class="text-white">
+                $5,300.<span class="h5">00</span>
+                </h2>
+                </div>
+                <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
+                </div>
+                <h6 class="text-white">13.21% Since last month</h6>
+                </div>
+                </div>
                 </div>
                 <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
-                    <div class="card bg-primary">
-                        <div class="card-body px-3 py-4">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div class="color-card">
-                                    <p class="mb-0 color-card-head">Orders</p>
-                                    <h2 class="text-white">
-                                        $1,753.<span class="h5">00</span>
-                                    </h2>
-                                </div>
-                                <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
-                            </div>
-                            <h6 class="text-white">67.98% Since last month</h6>
-                        </div>
-                    </div>
+                <div class="card bg-primary">
+                <div class="card-body px-3 py-4">
+                <div class="d-flex justify-content-between align-items-start">
+                <div class="color-card">
+                <p class="mb-0 color-card-head">Orders</p>
+                <h2 class="text-white">
+                $1,753.<span class="h5">00</span>
+                </h2>
+                </div>
+                <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
+                </div>
+                <h6 class="text-white">67.98% Since last month</h6>
+                </div>
+                </div>
                 </div>
                 <div class="col-xl-12 col-md-6 stretch-card pb-sm-3 pb-lg-0">
-                    <div class="card bg-success">
-                        <div class="card-body px-3 py-4">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div class="color-card">
-                                    <p class="mb-0 color-card-head">Affiliate</p>
-                                    <h2 class="text-white">2368</h2>
-                                </div>
-                                <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"></i>
-                            </div>
-                            <h6 class="text-white">20.32% Since last month</h6>
-                        </div>
-                    </div>
+                <div class="card bg-success">
+                <div class="card-body px-3 py-4">
+                <div class="d-flex justify-content-between align-items-start">
+                <div class="color-card">
+                <p class="mb-0 color-card-head">Affiliate</p>
+                <h2 class="text-white">2368</h2>
+                </div>
+                <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"></i>
+                </div>
+                <h6 class="text-white">20.32% Since last month</h6>
+                </div>
+                </div>
                 </div>*@
             </div>
         </div>

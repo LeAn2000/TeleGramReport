@@ -36,6 +36,13 @@ var Init = {
                 },
             },
         });
+
+        var date = new Date();
+        $("#kd-date-chooser").kendoDatePicker({
+            format: "dd/MM/yyyy",
+            value: date
+
+        });
     },
     InitColums: {
         RP: [
@@ -44,7 +51,7 @@ var Init = {
                 title: "Nhóm",
                 template: (dataItem) => {
                     var GroupID = dataItem.GroupID;
-                    var date = `'${$('#kd-date-chooser').val()}'`
+                    var date = `'${Click.formatdate($('#kd-date-chooser').data("kendoDatePicker").value())}'`
                     return `<h6 class="click" onClick="Click.detailclick(${GroupID},${date})">${dataItem.GroupName}</h6>`
                 }
             },
@@ -54,7 +61,7 @@ var Init = {
                 type: "int",
                 template: (dataItem) => {
                     var GroupID = dataItem.GroupID;
-                    var date = `'${$('#kd-date-chooser').val()}'`
+                    var date = `'${Click.formatdate($('#kd-date-chooser').data("kendoDatePicker").value())}'`
                     return `<h6 class="click" onClick="Click.detailclick(${GroupID},${date})">${kendo.toString(dataItem.Advance, "##,#")}</h6>`
                 }
             },
@@ -71,17 +78,17 @@ var Init = {
                 title: "Nhóm",
                 template: (dataItem) => {
                     var GroupID = dataItem.GroupID;
-                    var date = `'${$('#kd-date-chooser').val()}'`
+                    var date = `'${Click.formatdate($('#kd-date-chooser').data("kendoDatePicker").value()) }'`
                     var Type = `'${dataItem.Type}'`;
                     return `<h6 class='click' onClick="Click.logclick(${GroupID},${date},${Type})">${dataItem.GroupName}</h6>`
                 }
-            }, 
+            },
             {
                 field: "Type",
                 title: "Kiểu chơi",
                 template: (dataItem) => {
                     var GroupID = dataItem.GroupID;
-                    var date = `'${$('#kd-date-chooser').val()}'`
+                    var date = `'${Click.formatdate($('#kd-date-chooser').data("kendoDatePicker").value()) }'`
                     var Type = `'${dataItem.Type}'`;
                     return `<h6 class='click' onClick="Click.logclick(${GroupID},${date},${Type})">${dataItem.Type}</h6>`
                 }
@@ -92,7 +99,7 @@ var Init = {
                 type: "int",
                 template: (dataItem) => {
                     var GroupID = dataItem.GroupID;
-                    var date = `'${$('#kd-date-chooser').val()}'`
+                    var date = `'${Click.formatdate($('#kd-date-chooser').data("kendoDatePicker").value()) }'`
                     var Type = `'${dataItem.Type}'`;
                     return `<h6 class='click' onClick="Click.logclick(${GroupID},${date},${Type})">${kendo.toString(dataItem.Advance, "##,#")}</h6>`
                 },
@@ -155,7 +162,7 @@ var Init = {
                 title: "Điểm",
                 type: "int",
                 template: (dataItem) => {
-                  
+
                     return `<h6 class='click'>${kendo.toString(dataItem.Advance, "##,#")}</h6>`
                 }
             },
@@ -387,7 +394,7 @@ var Click = {
         $("#kd-report-click").click(function () {
             var RP = {
                 url: "/Home/dataBCReport",
-                param: { GroupID: $("#kd-group-chooser").data('kendoDropDownList').value(), date: $('#kd-date-chooser').val() },
+                param: { GroupID: $("#kd-group-chooser").data('kendoDropDownList').value(), date: Click.formatdate($('#kd-date-chooser').data("kendoDatePicker").value()) },
                 type: "post",
                 id: "#grid"
             }
@@ -407,8 +414,8 @@ var Click = {
         Click.changtab(1)
 
     },
-    logclick: function (GroupID, date,type) {
-        
+    logclick: function (GroupID, date, type) {
+
         var data = { GroupID: GroupID, date: date, Type: type }
         params = {
             url: "/Home/dataBCDetailType",
@@ -422,6 +429,20 @@ var Click = {
     },
     changtab: function (tab) {
         $("#tabstrip").data("kendoTabStrip").select(tab)
-    }
+    },
+    formatdate: (date, key) => {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        if (key)
+            return [day, month, year].join('-');
+        return [year, month, day].join('-');
+    },
 
 }

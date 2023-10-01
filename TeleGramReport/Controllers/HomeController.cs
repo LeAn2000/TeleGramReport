@@ -46,18 +46,27 @@ namespace TeleGramReport.Controllers
             return View();
 
         }
+        public IActionResult Logout()
+        {
+            Remove("username");
+            Remove("token");
+            return RedirectToAction("Index");
+
+        }
 
 
         public async Task<IActionResult> DashBoard()
         {
             var user = Get("username");
-            if (user != null || user != "")
+
+            if (string.IsNullOrEmpty(user))
             {
-                var result = await _dp.QueryAsync<DashBoardModel>("PowerTelegram..Global_Tracking", commandType: System.Data.CommandType.StoredProcedure);
-                ViewBag.user = user;
-                return View(result);
+                return RedirectToAction("Index");
+
             }
-            return RedirectToAction("Index");
+            var result = await _dp.QueryAsync<DashBoardModel>("PowerTelegram..Global_Tracking", commandType: System.Data.CommandType.StoredProcedure);
+            ViewBag.user = user;
+            return View(result);
         }
         public IActionResult Report()
         {
