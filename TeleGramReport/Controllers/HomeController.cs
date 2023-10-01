@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,11 +29,6 @@ namespace TeleGramReport.Controllers
 
 		}
 
-
-
-
-
-
 		public async Task<IActionResult> Index()
 		{
 			//Remove("token");
@@ -52,9 +48,11 @@ namespace TeleGramReport.Controllers
 		}
 
 
-		public IActionResult DashBoard()
+		public async Task<IActionResult> DashBoard()
 		{
-			return View();
+            var result = await _dp.QueryAsync<DashBoardModel>("PowerTelegram..Global_Tracking", commandType: System.Data.CommandType.StoredProcedure);
+            
+            return View(result);
 		}
         public IActionResult Report()
         {
@@ -371,5 +369,7 @@ namespace TeleGramReport.Controllers
 		}
 
 
-	}
+        
+
+    }
 }
